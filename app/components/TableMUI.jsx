@@ -8,13 +8,11 @@ export default function TableMUI({ data }) {
     const total = data[1]
     const percentages = data[2]
 
+
     console.log(data)
     return (
-        <Sheet
-
-
-        >
-            <Table>
+        <Sheet sx={{ border: '1px solid rgba(255, 255, 255, 0.4)', borderRadius: '5px', }}>
+            <Table stickyHeader>
                 <thead>
                     <tr>
                         <th style={{ width: '40%' }}>Deck</th>

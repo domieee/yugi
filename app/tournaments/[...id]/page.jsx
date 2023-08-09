@@ -2,6 +2,7 @@ import TableMUI from "@/app/components/TableMUI";
 import TournamentStats from "../../components/TournamentStats"
 // asdasd
 import styles from './id.module.css'
+import OuterWindowWrapper from "@/app/components/OuterWindowWrapper";
 
 export default async function SingleTournamentOverview({ params }) {
     const fetchInformations = async () => {
@@ -62,27 +63,29 @@ export default async function SingleTournamentOverview({ params }) {
 
     return (
         <>
-            <h2>Tournament Overview</h2>
-            <section>
-                <article>
-                    <h3>Informations</h3>
-                    <div className={styles.statsWrapper}>
-                        <TournamentStats title={'Location'} data={informations?.location} />
-                        <TournamentStats title={'Date'} data={informations?.datetimes.UIDate} />
-                        <TournamentStats title={'Tournament Winner'} data={informations.players[0][0].name} />
-                        <TournamentStats title={'Total Participants'} data={informations?.totalParticipants} />
-                    </div>
-                </article>
-            </section>
+            <OuterWindowWrapper>
+                <h2>Tournament Overview</h2>
+                <section>
+                    <article>
+                        <h3>Informations</h3>
+                        <div className={styles.statsWrapper}>
+                            <TournamentStats title={'Location'} data={informations?.location} />
+                            <TournamentStats title={'Date'} data={informations?.datetimes.UIDate} />
+                            <TournamentStats title={'Tournament Winner'} data={informations.players[0][0].name} />
+                            <TournamentStats title={'Total Participants'} data={informations?.totalParticipants} />
+                        </div>
+                    </article>
+                </section>
 
-            <section>
-                <h3>Statistics</h3>
-                <TableMUI data={breakdown} />
-            </section>
+                <section>
+                    <h3>Statistics</h3>
+                    <TableMUI data={breakdown} />
+                </section>
 
-            <section>
-                <h3>Tournament Tree</h3>
-            </section>
+                <section>
+                    <h3>Tournament Tree</h3>
+                </section>
+            </OuterWindowWrapper>
         </>
     )
 }

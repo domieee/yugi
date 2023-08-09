@@ -1,4 +1,6 @@
 .statsWrapper {
     justify-content: space-evenly;
     display: flex;
+    gap: 20px;
+    margin-block: 10px 25px;
 }
