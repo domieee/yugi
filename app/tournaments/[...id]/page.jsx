@@ -1,6 +1,6 @@
 import TableMUI from "@/app/components/TableMUI";
 import TournamentStats from "../../components/TournamentStats"
-
+// asdasd
 import styles from './id.module.css'
 
 export default async function SingleTournamentOverview({ params }) {
