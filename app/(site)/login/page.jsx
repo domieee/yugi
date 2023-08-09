@@ -1,5 +1,8 @@
 import styles from './login.module.css'
 import Link from 'next/link'
+import Checkbox from '@mui/joy/Checkbox';
+import Button from '@mui/joy/Button';
+import Input from '@mui/joy/Input';
 
 export default function Login() {
     return (
@@ -7,10 +10,10 @@ export default function Login() {
         <section>
             <article>
                 <h2>Login</h2>
-                <form method="post">
+                <form method="post" className={styles.form}>
                     <div className={styles.inputWrapper}>
                         <label htmlFor="email">E-Mail</label>
-                        <input type="email" name="email" id="email" />
+                        <Input size='sm' placeholder="johndoe@mail.com" variant="outlined" />
                     </div>
                     <div className={styles.inputWrapper}>
                         <div className={styles.passwordRow}>
@@ -22,9 +25,10 @@ export default function Login() {
                             </Link>
                         </div>
 
-                        <input type="password" name="password" id="password" />
+                        <Input size='sm' placeholder="••••••••" variant="outlined" />
                     </div>
-
+                    <Checkbox size='sm' label='Remember you?' />
+                    <Button variant='soft' size='sm'>Sign In</Button>
                 </form>
             </article>
         </section>
