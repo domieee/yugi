@@ -33,7 +33,7 @@ export default async function SingleTournamentOverview({ params }) {
 
     const fetchTournamentBreakdown = async () => {
         try {
-            const res = await fetch(`http://localhost:4200/tournament-breakdown`, {
+            const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/tournament-breakdown`, {
                 method: 'POST',
                 headers: {
                     "Access-Control-Allow-Origin": "*",
