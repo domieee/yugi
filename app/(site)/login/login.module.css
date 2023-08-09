@@ -1,0 +1,9 @@
+.inputWrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.passwordRow {
+    display: flex;
+    justify-content: space-between;
+}

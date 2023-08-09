@@ -1,0 +1,24 @@
+.container {
+    display: flex;
+    align-items: center;
+    height: 60px;
+    justify-content: center;
+
+}
+
+.logo {
+    margin-inline-end: 5px;
+}
+
+.linkBox {
+    display: flex;
+    gap: 10px;
+}
+
+.wrapper {
+    max-width: 1280px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding-inline: 20px;
+}
