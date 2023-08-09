@@ -6,7 +6,7 @@ import styles from './id.module.css'
 export default async function SingleTournamentOverview({ params }) {
     const fetchInformations = async () => {
         try {
-            const res = await fetch(`http://localhost:4200/tournament-overview`, {
+            const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/tournament-overview`, {
                 next: { revalidate: 30 },
                 method: 'POST',
                 headers: {
