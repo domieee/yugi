@@ -4,7 +4,7 @@ import Link from "next/link";
 export default async function Tournaments() {
     const fetchData = async () => {
         try {
-            const res = await fetch('http://localhost:4200/', { next: { revalidate: 30 } });
+            const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/`, { next: { revalidate: 30 } });
 
             if (!res.ok) {
                 throw new Error('Failed to fetch data');
