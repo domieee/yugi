@@ -17,7 +17,7 @@ export default function Navigation() {
 
                 <Link href='/'>
                     <GiFoxTail className={styles.logo} />
-                    Yu-Gi-Oh! Meta!
+                    Yu-Gi-Oh! Meta
                 </Link>
 
                 <section className={styles.linkBox}>
