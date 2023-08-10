@@ -13,7 +13,7 @@ export default function TableMUI({ data }) {
             <Table stickyHeader>
                 <thead>
                     <tr>
-                        <th style={{ width: '40%' }}>Deck</th>
+                        <th style={{ width: '40%', marginLeft: '10px' }}>Deck</th>
                         <th>Total Played</th>
                         <th>Total Played (%)</th>
                     </tr>

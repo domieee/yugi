@@ -6,9 +6,11 @@
 }
 
 .chartWrapper {
+    min-height: 425px;
     padding-block: 10px;
     border: 1px solid rgba(255, 255, 255, 0.4);
     border-radius: 5px;
+    height: 100%;
 }
 
 .chartContainer {

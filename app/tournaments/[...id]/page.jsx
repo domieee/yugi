@@ -73,10 +73,13 @@ export default async function SingleTournamentOverview({ params }) {
                     <article>
                         <h3>Informations</h3>
                         <div className={styles.statsWrapper}>
+                            <TournamentStats title={'Tournament Winner'} data={informations.players[0][0].name} />
+                            <TournamentStats title={'Winning Deck'} data={informations.players[0][0].deck} />
                             <TournamentStats title={'Location'} data={informations?.location} />
                             <TournamentStats title={'Date'} data={informations?.datetimes.UIDate} />
-                            <TournamentStats title={'Tournament Winner'} data={informations.players[0][0].name} />
+
                             <TournamentStats title={'Total Participants'} data={informations?.totalParticipants} />
+
                         </div>
                     </article>
                 </section>
