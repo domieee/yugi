@@ -1,6 +1,6 @@
 import TableMUI from "@/app/components/TableMUI";
 import TournamentStats from "../../components/TournamentStats"
-// asdasd
+import Chart from '../../components/Chart'
 import styles from './id.module.css'
 import OuterWindowWrapper from "@/app/components/OuterWindowWrapper";
 
@@ -32,6 +32,8 @@ export default async function SingleTournamentOverview({ params }) {
         }
     }
 
+    let isServerReady = false
+
     const fetchTournamentBreakdown = async () => {
         try {
             const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/tournament-breakdown`, {
@@ -50,6 +52,8 @@ export default async function SingleTournamentOverview({ params }) {
             }
 
             const data = await res.json()
+
+            isServerReady = true
 
             return data
         } catch (error) {
@@ -79,7 +83,15 @@ export default async function SingleTournamentOverview({ params }) {
 
                 <section>
                     <h3>Statistics</h3>
-                    <TableMUI data={breakdown} />
+                    <article className={styles.chartTableContainer}>
+                        <div className={styles.chartContainer}>
+                            {isServerReady && breakdown.length === 3 ? <Chart data={breakdown} /> : null}
+                        </div>
+                        <div className={styles.tableContainer}>
+                            <TableMUI data={breakdown} />
+                        </div>
+                    </article>
+
                 </section>
 
                 <section>
