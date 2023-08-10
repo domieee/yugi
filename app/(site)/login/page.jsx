@@ -8,8 +8,8 @@ import OuterWindowWrapper from '@/app/components/OuterWindowWrapper';
 export default function Login() {
     return (
         <OuterWindowWrapper>
-            <section>
-                <article>
+            <section className={styles.loginWrapper}>
+                <article className={styles.loginContainer}>
                     <h2>Login</h2>
                     <form method="post" className={styles.form}>
                         <div className={styles.inputWrapper}>
@@ -29,7 +29,7 @@ export default function Login() {
                             <Input size='sm' placeholder="••••••••" variant="outlined" />
                         </div>
                         <Checkbox size='sm' label='Remember you?' />
-                        <Button variant='soft' size='sm'>Sign In</Button>
+                        <Button className={styles.loginButton} variant='soft' size='sm'>Sign In</Button>
                     </form>
                 </article>
             </section>

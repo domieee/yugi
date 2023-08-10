@@ -1,0 +1,45 @@
+.treeRowContainerExpandedFalse {
+    margin-bottom: 10px;
+    height: 0;
+    display: none;
+    border: 1px solid rgba(1, 1, 255, 0.4);
+    border-radius: 5px;
+    transition: height 1s ease;
+}
+
+.treeRowContainerExpanded {
+    margin-bottom: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 5px;
+    height: 100%;
+}
+
+.expandRow {
+    color: rgba(255, 255, 255, 0.6);
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-block: 10px;
+    padding-left: 20px;
+}
+
+.expandRow > h4 {
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.6);
+}
+.expandRow:hover {
+    cursor: pointer;
+        background-color: #222;
+}
+
+
+.icon {
+    margin-right: 10px;
+    transform: rotate(90deg);
+}
+
+.iconExpandedFalse {
+    margin-right: 10px;
+    transform: rotate(0deg);
+}

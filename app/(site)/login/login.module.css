@@ -1,6 +1,20 @@
 .inputWrapper {
     display: flex;
     flex-direction: column;
+    margin-block: 10px;
+
+}
+
+.loginWrapper {
+    height: 100svh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.loginContainer {
+    width: 420px;
+    border-radius: 5px;
 }
 
 .passwordRow {
@@ -12,4 +26,10 @@
     display: flex;
     flex-direction: column;
     max-width: 420px;
+}
+
+.loginButton {
+    width: 75%;
+    margin-inline: auto;
+    margin-block: 10px;
 }
