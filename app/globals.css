@@ -86,12 +86,19 @@ body {
 }
 
 body {
+
   color: rgb(var(--foreground-rgb));
+  background-color: #121416;
 
 }
 
 html {
-  background-color: #111;
+  background-color: #121416;
+
+}
+
+main {
+  margin-top: 60px;
 }
 
 a {

@@ -6,6 +6,7 @@
 }
 
 .chartWrapper {
+    background-color: #121416;
     min-height: 425px;
     padding-block: 10px;
     border: 1px solid rgba(255, 255, 255, 0.4);

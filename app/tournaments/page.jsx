@@ -1,5 +1,6 @@
 import Link from "next/link";
 import OuterWindowWrapper from "../components/OuterWindowWrapper";
+import TournamentOverviewRow from "../components/TournamentOverviewRow";
 
 
 export default async function Tournaments() {
@@ -27,11 +28,9 @@ export default async function Tournaments() {
         <>
             <OuterWindowWrapper>
                 <section>
-                    {data?.map((tournament) => (
-                        <Link key={tournament._id} href={`/tournaments/${tournament._id}`}>
-                            <p>{tournament.location.length === 0 ? 'No location provided' : tournament.location}</p>
-                            <p>{tournament.totalParticipants}</p>
-                        </Link>
+                    {data?.map((tournament, index) => (
+                        <TournamentOverviewRow key={index} data={tournament} />
+
                     ))}
                 </section>
             </OuterWindowWrapper>

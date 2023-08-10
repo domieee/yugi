@@ -1,18 +1,11 @@
 .container {
-    border: 0.5px solid rgba(255, 255, 255, 0.4);
-    background: #111;
+    border: 0.5px solid rgba(var(--joy-palette-neutral-mainChannel, 99 107 116) / 0.3);
+    background: #121416;
     padding-inline-start: 20px;
     padding-block: 10px;
     width: 100%;
     border-radius: 5px;
 }
 
-.heading {
-    font-weight: 400;
-    color: rgba(255, 255, 255, 0.6);
-}
 
-.data {
-    font-size: 1.8em;
-    font-weight: 700;
-}
+

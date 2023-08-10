@@ -5,6 +5,8 @@ import styles from './id.module.css'
 import OuterWindowWrapper from "@/app/components/OuterWindowWrapper";
 import TournamentTreeRow from "@/app/components/TournamentTreeRow";
 
+import { Typography } from "@mui/joy";
+
 export default async function SingleTournamentOverview({ params }) {
     const fetchInformations = async () => {
         try {
@@ -63,9 +65,6 @@ export default async function SingleTournamentOverview({ params }) {
     }
 
     const fetchTournamentTree = async () => {
-
-
-
         try {
             const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/fetch-tournament-tree`, {
                 method: 'POST',
@@ -102,10 +101,10 @@ export default async function SingleTournamentOverview({ params }) {
     return (
         <>
             <OuterWindowWrapper>
-                <h2>Tournament Overview</h2>
+                <Typography level='h2' component='h2'>Tournament Overview</Typography>
                 <section>
                     <article>
-                        <h3>Informations</h3>
+                        <Typography component='h3' level='h3'>Informations</Typography>
                         <div className={styles.statsWrapper}>
                             <TournamentStats title={'Tournament Winner'} data={informations.players[0][0].name} />
                             <TournamentStats title={'Winning Deck'} data={informations.players[0][0].deck} />
@@ -131,14 +130,14 @@ export default async function SingleTournamentOverview({ params }) {
                 </section>
 
                 <section>
-                    <h3>Tournament Tree</h3>
-                    {tournamentTree[0]?.length > 0 ? <TournamentTreeRow data={tournamentTree[0]} title={'First Place'} expandedStatus={true} /> : null}
-                    {tournamentTree[1]?.length > 0 ? <TournamentTreeRow data={tournamentTree[1]} title={'Second Place'} expandedStatus={true} /> : null}
-                    {tournamentTree[2]?.length > 0 ? <TournamentTreeRow data={tournamentTree[2]} title={'Top 4'} expandedStatus={true} /> : null}
-                    {tournamentTree[3]?.length > 0 ? <TournamentTreeRow data={tournamentTree[3]} title={'Top 8'} expandedStatus={false} /> : null}
-                    {tournamentTree[4]?.length > 0 ? <TournamentTreeRow data={tournamentTree[4]} title={'Top 16'} expandedStatus={false} /> : null}
-                    {tournamentTree[5]?.length > 0 ? <TournamentTreeRow data={tournamentTree[5]} title={'Top 32'} expandedStatus={false} /> : null}
-                    {tournamentTree[6]?.length > 0 ? <TournamentTreeRow data={tournamentTree[6]} title={'Top 64'} expandedStatus={false} /> : null}
+                    <Typography component='h3' level='h3'>Tournament Tree</Typography>
+                    {tournamentTree[0]?.length > 0 ? <TournamentTreeRow data={tournamentTree[0]} xs={'firstPlace'} title={'First Place'} expandedStatus={true} /> : null}
+                    {tournamentTree[1]?.length > 0 ? <TournamentTreeRow data={tournamentTree[1]} xs={'secondPlace'} title={'Second Place'} expandedStatus={true} /> : null}
+                    {tournamentTree[2]?.length > 0 ? <TournamentTreeRow data={tournamentTree[2]} xs={'top4'} title={'Top 4'} expandedStatus={true} /> : null}
+                    {tournamentTree[3]?.length > 0 ? <TournamentTreeRow data={tournamentTree[3]} xs={'top8'} title={'Top 8'} expandedStatus={false} /> : null}
+                    {tournamentTree[4]?.length > 0 ? <TournamentTreeRow data={tournamentTree[4]} xs={'top16'} title={'Top 16'} expandedStatus={false} /> : null}
+                    {tournamentTree[5]?.length > 0 ? <TournamentTreeRow data={tournamentTree[5]} xs={'top32'} title={'Top 32'} expandedStatus={false} /> : null}
+                    {tournamentTree[6]?.length > 0 ? <TournamentTreeRow data={tournamentTree[6]} xs={'top64'} title={'Top 64'} expandedStatus={false} /> : null}
                 </section>
             </OuterWindowWrapper>
         </>
