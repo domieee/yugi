@@ -1,7 +1,7 @@
 .container {
     border: 0.5px solid rgba(255, 255, 255, 0.4);
-    background: rgb(17,17,17);
-    background: linear-gradient(137deg, rgba(17,17,17,1) 0%, rgba(17,18,34,1) 70%, rgba(17,18,34,1) 100%);
+    background: #111;
+
     padding-inline-start: 20px;
     padding-block: 10px;
     width: 100%;

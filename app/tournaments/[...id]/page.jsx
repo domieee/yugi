@@ -82,7 +82,6 @@ export default async function SingleTournamentOverview({ params }) {
                 </section>
 
                 <section>
-                    <h3>Statistics</h3>
                     <article className={styles.chartTableContainer}>
                         <div className={styles.chartContainer}>
                             {isServerReady && breakdown.length === 3 ? <Chart data={breakdown} /> : null}

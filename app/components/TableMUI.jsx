@@ -8,8 +8,6 @@ export default function TableMUI({ data }) {
     const total = data[1]
     const percentages = data[2]
 
-
-    console.log(data)
     return (
         <Sheet sx={{ border: '1px solid rgba(255, 255, 255, 0.4)', borderRadius: '5px', height: '100%' }}>
             <Table stickyHeader>
