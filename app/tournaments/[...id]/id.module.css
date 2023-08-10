@@ -10,6 +10,10 @@
     margin-inline: auto;
 }
 
+.tableContainer {
+    height: 100%;
+}
+
 .chartTableContainer {
     margin-block: 10px 25px;
     gap: 20px;

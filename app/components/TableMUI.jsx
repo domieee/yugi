@@ -11,7 +11,7 @@ export default function TableMUI({ data }) {
 
     console.log(data)
     return (
-        <Sheet sx={{ border: '1px solid rgba(255, 255, 255, 0.4)', borderRadius: '5px', }}>
+        <Sheet sx={{ border: '1px solid rgba(255, 255, 255, 0.4)', borderRadius: '5px', height: '100%' }}>
             <Table stickyHeader>
                 <thead>
                     <tr>
