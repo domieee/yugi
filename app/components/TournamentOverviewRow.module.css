@@ -1,0 +1,24 @@
+.overviewRow {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    width: 200px;
+}
+
+.row {
+    padding-left: 20px;
+    padding-block: 5px;
+    outline: 1px solid rgba(255,255,255,0.4);
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.row:hover {
+
+    background-color: #333;
+
+}
+
+.container {
+    display: flex;
+}

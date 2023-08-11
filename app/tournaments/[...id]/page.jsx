@@ -90,6 +90,10 @@ export default async function SingleTournamentOverview({ params }) {
         }
     };
 
+    function capitalizeFirstLetter() {
+        return informations.tournamentType.charAt(0).toUpperCase() + informations.tournamentType.slice(1);
+    }
+
 
 
     const informations = await fetchInformations()
@@ -101,7 +105,7 @@ export default async function SingleTournamentOverview({ params }) {
     return (
         <>
             <OuterWindowWrapper>
-                <Typography level='h2' component='h2'>Tournament Overview</Typography>
+                <Typography level='h2' component='h2'>{capitalizeFirstLetter()} Tournament Overview</Typography>
                 <section>
                     <article>
                         <Typography component='h3' level='h3'>Informations</Typography>
@@ -130,7 +134,7 @@ export default async function SingleTournamentOverview({ params }) {
                 </section>
 
                 <section>
-                    <Typography component='h3' level='h3'>Tournament Tree</Typography>
+                    <Typography component='h3' level='h3'> Tournament Tree</Typography>
                     {tournamentTree[0]?.length > 0 ? <TournamentTreeRow data={tournamentTree[0]} xs={'firstPlace'} title={'First Place'} expandedStatus={true} /> : null}
                     {tournamentTree[1]?.length > 0 ? <TournamentTreeRow data={tournamentTree[1]} xs={'secondPlace'} title={'Second Place'} expandedStatus={true} /> : null}
                     {tournamentTree[2]?.length > 0 ? <TournamentTreeRow data={tournamentTree[2]} xs={'top4'} title={'Top 4'} expandedStatus={true} /> : null}

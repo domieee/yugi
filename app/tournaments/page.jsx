@@ -1,6 +1,7 @@
 import Link from "next/link";
 import OuterWindowWrapper from "../components/OuterWindowWrapper";
 import TournamentOverviewRow from "../components/TournamentOverviewRow";
+import { Typography } from "@mui/joy";
 
 
 export default async function Tournaments() {
@@ -28,9 +29,9 @@ export default async function Tournaments() {
         <>
             <OuterWindowWrapper>
                 <section>
+                    <Typography level="h2" component='h2' >Tournament Overview</Typography>
                     {data?.map((tournament, index) => (
                         <TournamentOverviewRow key={index} data={tournament} />
-
                     ))}
                 </section>
             </OuterWindowWrapper>
