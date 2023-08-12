@@ -29,8 +29,7 @@
 }
 
 .row:hover {
-
-    background-color: #333;
+    background-color: var(--joy-palette-primary-800, #0A2744);
 
 }
 

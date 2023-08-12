@@ -35,6 +35,7 @@ export default async function Tournaments() {
                     <Typography level="h2" component='h2' >Tournament List</Typography>
 
                     <article style={{
+                        marginTop: '10px'
                     }}>
                         {data?.map((tournament, index) => (
                             <TournamentOverviewRow key={index} data={tournament} />

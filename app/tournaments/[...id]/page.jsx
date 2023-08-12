@@ -109,7 +109,7 @@ export default async function SingleTournamentOverview({ params }) {
                 <Typography level='h2' component='h2'>{capitalizeFirstLetter()} Tournament Overview</Typography>
                 <section>
                     <article>
-                        <Typography component='h3' level='h3'>Informations</Typography>
+                        <Typography component='h3' sx={{ color: 'var(--joy-palette-text-tertiary, var(--joy-palette-neutral-600, #555E68))' }} level='h3'>Informations</Typography>
                         <div className={styles.statsWrapper}>
                             <TournamentStats icon={<GiTrophy />} title={'Tournament Winner'} data={informations.players[0][0].name} />
                             <TournamentStats icon={<GiStack />} title={'Winning Deck'} data={informations.players[0][0].deck} />
