@@ -15,6 +15,7 @@ export default function NavigationButton() {
     const setUserID = useStore((state) => state.setUserID)
     const setUserRole = useStore((state) => state.setUserRole)
     const username = useStore((state) => state.username)
+    const role = useStore((state) => state.role)
 
     const router = useRouter()
     console.log("🚀 ~ file: NavigationButton.jsx:14 ~ NavigationButton ~ username:", username)
@@ -25,7 +26,7 @@ export default function NavigationButton() {
     }
 
     return (
-        username === undefined ?
+        username === false ?
             <Link style={{ marginInlineStart: '50px' }} href='/login'>
                 <Tooltip size='sm' variant="outlined" color="primary" title='Login'>
                     <MdLogin />
@@ -44,13 +45,18 @@ export default function NavigationButton() {
                         invertedColors
                         color="primary"
                         size="sm">
-                        <MenuItem onClick={() => router.push('/interface')}>
-                            <ListItemDecorator>
-                                <MdOutlineAddBox />
-                            </ListItemDecorator>
-                            Interface
-                        </MenuItem>
-                        <ListDivider />
+
+                        {role === 'administrator' || role === 'moderator' ?
+                            <>
+                                <MenuItem onClick={() => router.push('/interface')}>
+                                    <ListItemDecorator>
+                                        <MdOutlineAddBox />
+                                    </ListItemDecorator>
+                                    Interface
+                                </MenuItem>
+                                <ListDivider />
+                            </> : null}
+
 
                         <MenuItem color="danger" onClick={logoutUser}>
                             <ListItemDecorator>
