@@ -20,7 +20,7 @@ export default function NavigationButton() {
     const router = useRouter()
     console.log("🚀 ~ file: NavigationButton.jsx:14 ~ NavigationButton ~ username:", username)
     const logoutUser = () => {
-        setUserName(undefined)
+        setUserName(false)
         Cookies.remove('token')
         router.push('/login')
     }
@@ -29,7 +29,9 @@ export default function NavigationButton() {
         username === false ?
             <Link style={{ marginInlineStart: '50px' }} href='/login'>
                 <Tooltip size='sm' variant="outlined" color="primary" title='Login'>
-                    <MdLogin />
+                    <IconButton color="primary" size="sm" variant="outlined">
+                        <MdLogin color='#EAEEF6' />
+                    </IconButton>
                 </Tooltip>
             </Link> :
             <>
@@ -45,7 +47,6 @@ export default function NavigationButton() {
                         invertedColors
                         color="primary"
                         size="sm">
-
                         {role === 'administrator' || role === 'moderator' ?
                             <>
                                 <MenuItem onClick={() => router.push('/interface')}>
@@ -56,7 +57,6 @@ export default function NavigationButton() {
                                 </MenuItem>
                                 <ListDivider />
                             </> : null}
-
 
                         <MenuItem color="danger" onClick={logoutUser}>
                             <ListItemDecorator>
