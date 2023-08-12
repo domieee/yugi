@@ -1,7 +1,9 @@
-import { Grid, Typography } from "@mui/joy";
+import { Grid, Sheet, Typography } from "@mui/joy";
 import OuterWindowWrapper from "../components/OuterWindowWrapper";
 import TableMUI from "../components/TableMUI";
 import Chart from "../components/Chart";
+
+import styles from './statistics.module.css'
 
 export default async function Statistics() {
     const fetchOverallBreakdown = async () => {
@@ -45,10 +47,14 @@ export default async function Statistics() {
     return (
         <OuterWindowWrapper>
             <Typography level='h2' component='h2'>Statistics</Typography>
-            <Grid container >
+            <Grid container direction='row' >
 
                 <Grid xs={6} item>
-                    <Chart data={overallBreakdown} />
+                    <Sheet variant="outlined" color="primary">
+                        <div className={styles.chartWrapper}>
+                            <Chart data={overallBreakdown} />
+                        </div>
+                    </Sheet>
                 </Grid>
 
                 <Grid xs={6} item>
@@ -56,14 +62,24 @@ export default async function Statistics() {
                 </Grid>
 
             </Grid>
-            <Grid container >
+            <Grid container gap={2} direction={'row'} >
 
                 <Grid xs={6} item>
-                    <TableMUI data={overallBreakdown} />
+
+
+                    <TableMUI data={winnerBreakdown} />
+
+
                 </Grid>
 
                 <Grid xs={6} item>
-                    <Chart data={overallBreakdown} />
+                    <Sheet variant="outlined" color="primary" >
+                        <div className={styles.chartContainer}>
+                            <div className={styles.chartWrapper}>
+                                <Chart data={winnerBreakdown} />
+                            </div>
+                        </div>
+                    </Sheet>
                 </Grid>
 
             </Grid>

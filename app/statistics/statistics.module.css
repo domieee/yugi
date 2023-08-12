@@ -1,0 +1,15 @@
+.chartWrapper {
+    max-width: 400px;
+    display: flex;
+    width: 100%;
+    align-items: center;
+}
+
+.chartWrapper > canvas {
+    margin-inline: auto;
+}
+
+.chartContainer {
+    width: 100%;
+
+}
