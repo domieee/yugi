@@ -1,0 +1,13 @@
+.userDropdownNavText {
+    border-radius: 5px;
+    padding: 5px 5px;
+    display: flex;
+    align-items: center;
+    outline: 1px solid var(--joy-palette-primary-700, #12467B);
+    color: var(--joy-palette-neutral-400, #9FA6AD);
+}
+
+.userDropdownNavText:hover {
+    cursor: pointer;
+    background-color: var(--joy-palette-primary-800, #0A2744);
+}

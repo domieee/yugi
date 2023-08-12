@@ -1,16 +1,27 @@
 import Link from 'next/link'
 import React from 'react'
 
-import Tooltip from '@mui/joy/Tooltip';
 
-import { GiFoxTail } from "react-icons/gi";
 
 import styles from './navigation.module.css'
 
 import { MdLogin, MdLogout } from "react-icons/md";
-import { Typography } from '@mui/joy';
+import { GiFoxTail } from "react-icons/gi";
 
-export default function Navigation() {
+import { Typography, Skeleton, Tooltip } from '@mui/joy';
+import Cookies from 'js-cookie';
+import dynamic from 'next/dynamic';
+
+import * as MUI from '@mui/joy';
+import { useStore } from '../stores/userStore';
+
+const NavigationButton = dynamic(() => import('./NavigationButton'), {
+    loading: () => <Skeleton animation="wave" variant="text" sx={{ width: 75 }} />, // Display a loading message while the component is being loaded
+    ssr: false, // This will prevent the component from being SSR'd
+});
+
+export default function Navigation({ user }) {
+
     return (
         <nav className={styles.container}>
             <section className={styles.wrapper}>
@@ -22,23 +33,33 @@ export default function Navigation() {
 
                 <section className={styles.linkBox}>
                     <Tooltip size='sm' variant="outlined" color="primary" title='Watch all Tournaments'>
-                        <Link className={styles.link} href='/tournaments'><Typography component='p' level='body-md' >Tournaments</Typography></Link>
+                        <Link className={styles.link} href='/tournaments'>
+                            <MUI.Link
+                                color="primary"
+                                disabled={false}
+                                level="body-sm"
+                                underline="none"
+                                variant="plain"
+                                component='p'
+                            >Tournaments</MUI.Link>
+                        </Link>
                     </Tooltip>
 
                     <Tooltip size='sm' variant="outlined" color="primary" title='Watch Statistics'>
-                        <Link className={styles.link} href='/statistics'><Typography component='p' level='body-md' >Statistics</Typography></Link>
+                        <Link className={styles.link} href='/statistics'>
+                            <MUI.Link
+                                color="primary"
+                                disabled={false}
+                                level="body-sm"
+                                underline="none"
+                                variant="plain"
+                                component='p'
+                            >Statistics</MUI.Link>
+                        </Link>
                     </Tooltip>
-
-
-                    <Link className={styles.logoLogin} href='/login'>
-                        <Tooltip size='sm' variant="outlined" color="primary" title='Login'>
-                            <MdLogin />
-                        </Tooltip>
-                    </Link>
-
-
-
+                    <NavigationButton />
                 </section>
+
             </section>
         </nav >
     )

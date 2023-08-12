@@ -38,10 +38,13 @@
 
 .linkBox {
     display: flex;
+
     gap: 10px;
 }
 
 .link {
+    display: flex;
+    align-items: center;
     border-radius: 5px;
     padding: 0px 5px;
 }

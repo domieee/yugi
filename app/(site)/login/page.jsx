@@ -7,6 +7,8 @@ import Button from '@mui/joy/Button';
 import Input from '@mui/joy/Input';
 import OuterWindowWrapper from '@/app/components/OuterWindowWrapper';
 
+import { useStore } from '@/app/stores/userStore';
+
 import Cookies from 'js-cookie';
 import { useRouter } from 'next/navigation';
 
@@ -24,6 +26,12 @@ export default function Login() {
     const [alertVisibility, updateAlertVisibility] = useState(false)
     const [alert, updateAlert] = useState('')
     const [errorKey, setErrorKey] = useState('')
+
+    const setUserName = useStore((state) => state.setUserName)
+    const setUserID = useStore((state) => state.setUserID)
+    const setUserRole = useStore((state) => state.setUserRole)
+
+    const user = useStore((state) => state.username)
 
     const loginUser = async () => {
         const requestBody = {
@@ -62,12 +70,16 @@ export default function Login() {
 
                 const json = await userInformation.json()
 
-                setTimeout(() => {
+                setTimeout(async () => {
                     setFetching(false)
 
                     // TODO: Set the User in the global user store
 
-                    // ? ...
+                    await setUserName(json.username)
+                    await setUserID(json.id)
+                    await setUserRole(json.role)
+
+                    console.log(user)
 
                     // And navigate back to the homepage
                     router.push('/')
