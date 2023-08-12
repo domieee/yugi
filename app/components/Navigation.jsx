@@ -21,17 +21,21 @@ export default function Navigation() {
                 </Link>
 
                 <section className={styles.linkBox}>
-                    <Tooltip size='sm' variant="plain" title='Watch all Tournaments'>
+                    <Tooltip size='sm' variant="outlined" color="primary" title='Watch all Tournaments'>
                         <Link href='/tournaments'><Typography component='p' level='body-md' >Tournaments</Typography></Link>
                     </Tooltip>
 
-                    <Tooltip size='sm' variant="plain" title='Watch Statistics'>
+                    <Tooltip size='sm' variant="outlined" color="primary" title='Watch Statistics'>
                         <Link href='/statistics'><Typography component='p' level='body-md' >Statistics</Typography></Link>
                     </Tooltip>
 
-                    <Tooltip size='sm' variant="plain" title='Login'>
-                        <Link href='/login'><MdLogin style={{ marginLeft: '50px' }} /></Link>
-                    </Tooltip>
+
+                    <Link href='/login'>
+                        <Tooltip size='sm' variant="outlined" color="primary" title='Login'>
+                            <MdLogin style={{ marginLeft: '50px' }} />
+                        </Tooltip>
+                    </Link>
+
 
 
                 </section>

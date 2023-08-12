@@ -22,6 +22,7 @@ import {
 import { HiExternalLink } from "react-icons/hi";
 
 import { MdKeyboardArrowDown } from 'react-icons/md';
+import { Tooltip } from '@mui/joy';
 
 export default function TournamentTreeRow({ data, title, expandedStatus, xs }) {
 
@@ -43,22 +44,35 @@ export default function TournamentTreeRow({ data, title, expandedStatus, xs }) {
 
     return (
         <>
+
             <div onClick={() => toggleItemExpanded()} className={styles.expandRow}>
                 <h4>{title}</h4>
                 <MdKeyboardArrowDown className={expanded ? styles.iconExpandedFalse : styles.icon} />
             </div>
+
             <article id={xs} >
-                {
-                    data.map((item, index) => (
-                        <div onClick={() => setOpen({ state: true, item: item.deckLink })} key={index} xs={2} className={expanded ? styles.treeRowContainerExpanded : styles.treeRowContainerExpandedFalse}>
-                            <div className={styles.informationRow}><GiPerson /> <Typography component='p' level='body-md' >{item.name.length > 0 ? item.name : 'N/A'}</Typography ></div>
-                            <div className={styles.informationRow} ><GiStack /> <Typography component='p' level='body-md'>{item.deck.length > 0 ? item.deck : 'N/A'}</Typography ></div>
-                            <div className={styles.informationRow}><GiStabbedNote /> <Typography component='p' level='body-md'>{item.deckNote.length > 0 ? item.deckNote : 'N/A'}</Typography ></div>
-                            <div className={styles.informationRow}><HiExternalLink /><Typography component='p' level='body-md'>{item.deckLink.length > 0 ? item.deckLink : 'N/A'}</Typography ></div>
-                        </div >
-                    ))
+                {data.map((item, index) => (
+                    item.deckLink.length > 0 ?
+                        <Tooltip key={index} size='sm' variant="outlined" color="primary" title={item.deckLink} placement="top">
+                            <div onClick={() => setOpen({ state: true, item: item.deckLink })} xs={2} className={expanded ? styles.treeRowContainerExpanded : styles.treeRowContainerExpandedFalse}>
+                                <div className={styles.informationRow}><GiPerson /> <Typography component='p' level='body-md' >{item.name.length > 0 ? item.name : 'N/A'}</Typography ></div>
+                                <div className={styles.informationRow} ><GiStack /> <Typography component='p' level='body-md'>{item.deck.length > 0 ? item.deck : 'N/A'}</Typography ></div>
+                                <div className={styles.informationRow}><GiStabbedNote /> <Typography component='p' level='body-md'>{item.deckNote.length > 0 ? item.deckNote : 'N/A'}</Typography ></div>
+                                <div className={styles.informationRow}><HiExternalLink /><Typography component='p' level='body-md'>{item.deckLink.length > 0 ? item.deckLink : 'N/A'}</Typography ></div>
+                            </div>
+                        </Tooltip> :
+                        <Tooltip key={index} size='sm' title="No external link provided" color="danger" placement="top" variant='outlined'>
+                            <div xs={2} className={expanded ? styles.treeRowContainerExpandedWithoutLink : styles.treeRowContainerExpandedFalse}>
+                                <div className={styles.informationRow}><GiPerson /> <Typography component='p' level='body-md' >{item.name.length > 0 ? item.name : 'N/A'}</Typography ></div>
+                                <div className={styles.informationRow} ><GiStack /> <Typography component='p' level='body-md'>{item.deck.length > 0 ? item.deck : 'N/A'}</Typography ></div>
+                                <div className={styles.informationRow}><GiStabbedNote /> <Typography component='p' level='body-md'>{item.deckNote.length > 0 ? item.deckNote : 'N/A'}</Typography ></div>
+                                <div className={styles.informationRow}><HiExternalLink /><Typography component='p' level='body-md'>{item.deckLink.length > 0 ? item.deckLink : 'N/A'}</Typography ></div>
+                            </div>
+                        </Tooltip>
+                ))
                 }
             </article>
+
 
             <Modal
                 aria-labelledby="modal-title"
@@ -100,10 +114,12 @@ export default function TournamentTreeRow({ data, title, expandedStatus, xs }) {
 
                         You are about to be redirected to an external page. Would you like to proceed?
                     </Typography>
-
-                    <Typography fontWeight='lg' level='body-sm' textColor="inherit">
-                        <HiExternalLink /> {open.item}
-                    </Typography>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '5px', marginTop: '10px' }}>
+                        <HiExternalLink />
+                        <Typography fontWeight='lg' level='body-sm' textColor="inherit">
+                            {open.item}
+                        </Typography>
+                    </div>
                     <div style={{ width: '100%', display: 'flex', justifyContent: 'end', gap: '5px' }}>
                         <Button variant='outlined' size='sm' onClick={() => setOpen({ state: false, item: null })}>Decline</Button>
                         <Button size='sm' onClick={() => handleRedirect()}>Redirect</Button>

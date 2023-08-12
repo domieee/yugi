@@ -20,6 +20,21 @@
     background-color: #222;
 }
 
+.treeRowContainerExpandedWithoutLink {
+    padding-left: 10px;
+    padding-block: 5px;
+    margin-bottom: 10px;
+    border: 1px solid rgba(var(--joy-palette-neutral-mainChannel, 99 107 116) / 0.3);
+    border-radius: 5px;
+    height: 100%;
+    background-color: #121416;
+    align-items: center;
+}
+
+.treeRowContainerExpandedWithoutLink:hover {
+cursor: not-allowed;
+}
+
 .expandRow {
     font-weight: 400;
     border-radius: 5px;
