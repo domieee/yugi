@@ -5,7 +5,7 @@ import styles from './id.module.css'
 import OuterWindowWrapper from "@/app/components/OuterWindowWrapper";
 import TournamentTreeRow from "@/app/components/TournamentTreeRow";
 
-import { Typography } from "@mui/joy";
+import { Typography, Sheet } from "@mui/joy";
 import { GiCalendar, GiPlanetConquest, GiTabletopPlayers, GiTrophy, GiStack } from "react-icons/gi";
 
 export default async function SingleTournamentOverview({ params }) {
@@ -122,11 +122,11 @@ export default async function SingleTournamentOverview({ params }) {
 
                 <section>
                     <article className={styles.chartTableContainer}>
-                        <div className={styles.chartWrapper}>
+                        <Sheet variant='outlined' color='primary' className={styles.chartWrapper}>
                             <div className={styles.chartContainer}>
                                 {isServerReady && breakdown.length === 3 ? <Chart data={breakdown} /> : null}
                             </div>
-                        </div>
+                        </Sheet>
                         <div className={styles.tableContainer}>
                             <TableMUI data={breakdown} />
                         </div>

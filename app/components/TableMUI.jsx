@@ -9,8 +9,8 @@ export default function TableMUI({ data }) {
     const percentages = data[2]
 
     return (
-        <Sheet sx={{ border: '1px solid rgba(255, 255, 255, 0.4)', borderRadius: '5px', height: '100%' }}>
-            <Table stickyHeader>
+        <Sheet variant='outlined' color='primary' sx={{ height: '100%', }} >
+            <Table sx={{ borderRadius: '5px' }} stickyHeader >
                 <thead>
                     <tr>
                         <th style={{ width: '40%', marginLeft: '10px' }}>Deck</th>
