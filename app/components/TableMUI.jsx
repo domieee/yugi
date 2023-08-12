@@ -9,11 +9,11 @@ export default function TableMUI({ data }) {
     const percentages = data[2]
 
     return (
-        <Sheet variant='outlined' color='primary' sx={{ height: '100%', }} >
-            <Table sx={{ borderRadius: '5px' }} stickyHeader >
+        <Sheet variant='outlined' color='primary' sx={{ height: '500px', overflow: 'auto', borderRadius: '5px' }} >
+            <Table size='md' sx={{ borderRadius: '5px', paddingInline: '10px' }} stickyHeader >
                 <thead>
                     <tr>
-                        <th style={{ width: '40%', marginLeft: '10px' }}>Deck</th>
+                        <th style={{ width: '40%', }}>Deck</th>
                         <th>Total Played</th>
                         <th>Total Played (%)</th>
                     </tr>

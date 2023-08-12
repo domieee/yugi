@@ -47,33 +47,31 @@ export default async function Statistics() {
     return (
         <OuterWindowWrapper>
             <Typography level='h2' component='h2'>Statistics</Typography>
-            <Grid container direction='row' >
+            <Typography level='h3' component='h3'>Overall Breakdown</Typography>
 
-                <Grid xs={6} item>
-                    <Sheet variant="outlined" color="primary">
-                        <div className={styles.chartWrapper}>
-                            <Chart data={overallBreakdown} />
+            <Grid container gap={2}>
+                <Grid xs={12} lg={4} item>
+                    <Sheet sx={{ height: '100%', borderRadius: '5px' }} variant="outlined" color="primary">
+                        <div className={styles.chartContainer} >
+                            <div className={styles.chartWrapper}>
+                                <Chart data={overallBreakdown} />
+                            </div>
                         </div>
                     </Sheet>
                 </Grid>
 
-                <Grid xs={6} item>
+                <Grid sx={{ width: '100%' }} xs={12} lg={7.8} item>
                     <TableMUI data={overallBreakdown} />
                 </Grid>
-
             </Grid>
-            <Grid container gap={2} direction={'row'} >
-
-                <Grid xs={6} item>
-
-
+            <Typography level='h3' component='h3'>Winner Breakdown</Typography>
+            <Grid container gap={2}>
+                <Grid sx={{ width: '100%' }} xs={12} lg={7.8} item>
                     <TableMUI data={winnerBreakdown} />
-
-
                 </Grid>
 
-                <Grid xs={6} item>
-                    <Sheet variant="outlined" color="primary" >
+                <Grid xs={6} lg={4} item>
+                    <Sheet sx={{ height: '100%', borderRadius: '5px' }} variant="outlined" color="primary" >
                         <div className={styles.chartContainer}>
                             <div className={styles.chartWrapper}>
                                 <Chart data={winnerBreakdown} />
@@ -81,9 +79,8 @@ export default async function Statistics() {
                         </div>
                     </Sheet>
                 </Grid>
-
             </Grid>
-        </OuterWindowWrapper>
 
+        </OuterWindowWrapper>
     )
 }

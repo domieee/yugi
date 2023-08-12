@@ -1,8 +1,8 @@
 .chartWrapper {
-    max-width: 400px;
+    max-width: 500px;
     display: flex;
-    width: 100%;
     align-items: center;
+    align-self: center;
 }
 
 .chartWrapper > canvas {
@@ -10,6 +10,9 @@
 }
 
 .chartContainer {
-    width: 100%;
-
+    margin-inline: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    place-content: center;
 }
