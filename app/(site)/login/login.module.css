@@ -6,7 +6,7 @@
 }
 
 .loginWrapper {
-    height: 100svh;
+    height: 90vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -34,4 +34,8 @@
     width: 75%;
     margin-inline: auto;
     margin-block: 10px;
+}
+
+.register:hover {
+    text-decoration: underline;
 }

@@ -21,7 +21,6 @@
 
 .overviewInformation:nth-child(1) {
     color: rgba(255,255,255,0.4);
-
 }
 
 .logo {
@@ -30,7 +29,6 @@
 
 .row:hover {
     background-color: var(--joy-palette-primary-800, #0A2744);
-
 }
 
 .container {
