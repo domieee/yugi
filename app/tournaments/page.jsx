@@ -28,13 +28,20 @@ export default async function Tournaments() {
 
         <>
             <OuterWindowWrapper>
-                <section>
-                    <Typography level="h2" component='h2' >Tournament Overview</Typography>
-                    {data?.map((tournament, index) => (
-                        <TournamentOverviewRow key={index} data={tournament} />
-                    ))}
+                <section style={{
+
+                }}>
+
+                    <Typography level="h2" component='h2' >Tournament List</Typography>
+
+                    <article style={{
+                    }}>
+                        {data?.map((tournament, index) => (
+                            <TournamentOverviewRow key={index} data={tournament} />
+                        ))}
+                    </article>
                 </section>
-            </OuterWindowWrapper>
+            </OuterWindowWrapper >
         </>
     );
 }

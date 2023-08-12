@@ -8,9 +8,24 @@
 .row {
     padding-left: 20px;
     padding-block: 5px;
-    outline: 1px solid rgba(255,255,255,0.4);
+    outline: 1px solid rgba(255,255,255,0.2);
     border-radius: 5px;
     margin-bottom: 10px;
+}
+
+.overviewInformation {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.overviewInformation:nth-child(1) {
+    color: rgba(255,255,255,0.4);
+
+}
+
+.logo {
+   color: var(--joy-palette-text-tertiary, var(--joy-palette-neutral-600, #555E68))
 }
 
 .row:hover {

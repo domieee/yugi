@@ -15,6 +15,11 @@
     align-items: center;
 }
 
+.treeRowContainerExpanded:hover {
+    cursor: pointer;
+    background-color: #222;
+}
+
 .expandRow {
     font-weight: 400;
     border-radius: 5px;
@@ -23,6 +28,7 @@
     justify-content: space-between;
     padding-block: 10px;
     padding-left: 20px;
+    margin-bottom: 5px;
 }
 
 

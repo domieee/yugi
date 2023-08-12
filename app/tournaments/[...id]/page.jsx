@@ -6,6 +6,7 @@ import OuterWindowWrapper from "@/app/components/OuterWindowWrapper";
 import TournamentTreeRow from "@/app/components/TournamentTreeRow";
 
 import { Typography } from "@mui/joy";
+import { GiCalendar, GiPlanetConquest, GiTabletopPlayers, GiTrophy, GiStack } from "react-icons/gi";
 
 export default async function SingleTournamentOverview({ params }) {
     const fetchInformations = async () => {
@@ -110,11 +111,11 @@ export default async function SingleTournamentOverview({ params }) {
                     <article>
                         <Typography component='h3' level='h3'>Informations</Typography>
                         <div className={styles.statsWrapper}>
-                            <TournamentStats title={'Tournament Winner'} data={informations.players[0][0].name} />
-                            <TournamentStats title={'Winning Deck'} data={informations.players[0][0].deck} />
-                            <TournamentStats title={'Location'} data={informations?.location} />
-                            <TournamentStats title={'Date'} data={informations?.datetimes.UIDate} />
-                            <TournamentStats title={'Total Participants'} data={informations?.totalParticipants} />
+                            <TournamentStats icon={<GiTrophy />} title={'Tournament Winner'} data={informations.players[0][0].name} />
+                            <TournamentStats icon={<GiStack />} title={'Winning Deck'} data={informations.players[0][0].deck} />
+                            <TournamentStats icon={<GiPlanetConquest />} title={'Location'} data={informations?.location} />
+                            <TournamentStats icon={<GiCalendar />} title={'Date'} data={informations?.datetimes.UIDate} />
+                            <TournamentStats icon={<GiTabletopPlayers />} title={'Total Participants'} data={informations?.totalParticipants} />
                         </div>
                     </article>
                 </section>
