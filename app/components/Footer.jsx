@@ -1,6 +1,7 @@
 import React from 'react'
 import { Box, Divider, Link, Sheet, Typography } from '@mui/joy'
 import Image from 'next/image'
+import { GiFoxTail } from 'react-icons/gi'
 
 export default function Footer() {
     return (
@@ -26,14 +27,10 @@ export default function Footer() {
                             flexDirection: 'column',
                             maxWidth: '250px'
                         }}>
-                        <a href='/imprint'>
-                            <Typography
-                                variant='caption'>Imprint</Typography>
-                        </a>
-                        <a href='/privacy-policy'>
-                            <Typography
-                                variant='caption'>Privacy Policy</Typography>
-                        </a>
+
+                        <Link href='/imprint'>Imprint</Link>
+                        <Link href='/privacy-policy'>Privacy Policy</Link>
+                        <GiFoxTail />
                     </Box>
 
                     <Box
@@ -43,7 +40,7 @@ export default function Footer() {
                             maxWidth: '250px'
                         }}>
                         <Typography
-                            variant='caption'
+                            variant='body-sm'
                             marginBottom='10px'
                         >We are constantly working on improving this website. Do you have any suggestions for improvement, or would you like to support the project? Follow the links below.</Typography>
                         <Link href='/feedback'
