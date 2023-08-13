@@ -1,9 +1,12 @@
 .container {
-
     padding-inline-start: 20px;
     padding-block: 10px;
     width: 100%;
     border-radius: 5px;
+    min-height: 75px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .heading {

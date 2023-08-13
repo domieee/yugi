@@ -2,4 +2,9 @@
     height: 100vh;
     display: flex;
     align-items: center;
+    padding-left: 100px;
+}
+
+.landingPage > article {
+    max-width: 1080px;
 }

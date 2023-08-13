@@ -7,7 +7,7 @@ import styles from './home.module.css'
 export default function Home() {
   return (
     <>
-      <div style={{ width: '460px', height: '460px', opacity: '0.2', position: 'fixed' }}>
+      <div style={{ width: '460px', height: '460px', opacity: '0.5', position: 'fixed' }}>
         <Image
           src="/blobanimation(1).svg"
           width={1000}

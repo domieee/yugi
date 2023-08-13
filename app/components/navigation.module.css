@@ -36,6 +36,12 @@
     background-color: red
 }
 
+.logoContainer {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
 .linkBox {
     display: flex;
 
