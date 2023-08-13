@@ -39,3 +39,9 @@
 .register:hover {
     text-decoration: underline;
 }
+
+.checkbox {
+    align-items: center;
+    gap: 5px;
+    display: flex;
+}

@@ -21,7 +21,7 @@ export default function NavigationButton() {
     console.log("🚀 ~ file: NavigationButton.jsx:14 ~ NavigationButton ~ username:", username)
     const logoutUser = () => {
         setUserName(false)
-        Cookies.remove('token')
+        Cookies.remove('userToken')
         router.push('/login')
     }
 

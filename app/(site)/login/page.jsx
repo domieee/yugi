@@ -17,27 +17,23 @@ import { useState } from 'react';
 import { MdPerson2, MdKey } from 'react-icons/md';
 
 export default function Login() {
-    const router = useRouter()
 
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
+    const [remember, setRemember] = useState(false)
     const [fetching, setFetching] = useState(false)
-
-    const [alertVisibility, updateAlertVisibility] = useState(false)
-    const [alert, updateAlert] = useState('')
-    const [errorKey, setErrorKey] = useState('')
 
     const setUserName = useStore((state) => state.setUserName)
     const setUserID = useStore((state) => state.setUserID)
     const setUserRole = useStore((state) => state.setUserRole)
 
-    const user = useStore((state) => state.username)
+    const router = useRouter()
 
     const loginUser = async () => {
         const requestBody = {
             mailOrName: String(username),
             password: String(password)
-        };
+        }
 
         setFetching(true)
         const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/login`, {
@@ -50,10 +46,15 @@ export default function Login() {
         })
 
         if (response.status === 200) {
-
             const json = await response.json()
-            Cookies.set('token', json, { expires: 7 })
-            const currentToken = Cookies.get('token');
+
+            // In case the checkbox for remembering the password is active, the token expires after one year, otherwise after one day.
+            remember ?
+                Cookies.set('userToken', json, { expires: 365 }) :
+                Cookies.set('userToken', json, { expires: 1 })
+
+            // Receive the user information by sending the token to the server and resolving it there.
+            const currentToken = Cookies.get('userToken')
 
             const userInformation = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/receive-user-informations`, {
                 method: 'POST',
@@ -67,43 +68,28 @@ export default function Login() {
             })
 
             if (userInformation.status === 200) {
-
                 const json = await userInformation.json()
 
-                setTimeout(async () => {
-                    setFetching(false)
+                // If we received the user information successfully, we write it in our user store and handle the UI states
+                setFetching(false)
+                await setUserName(json.username)
+                await setUserID(json.id)
+                await setUserRole(json.role)
 
-                    // TODO: Set the User in the global user store
-
-                    await setUserName(json.username)
-                    await setUserID(json.id)
-                    await setUserRole(json.role)
-
-                    console.log(user)
-
-                    // And navigate back to the homepage
-                    router.push('/')
-                }, 500)
+                // After that, we navigate back to the homepage
+                router.push('/')
 
             } else if (userInformation.status === 400) {
                 setFetching(false)
-                const json = await response.json()
-                console.log(json)
+                const error = await response.json()
+                console.log(error)
             }
 
         } else if (response.status === 400) {
-
+            setFetching(false)
             const error = await response.json()
             console.log(error)
-            setFetching(false)
 
-            // Handle the errors in the UI
-            updateAlertVisibility(true)
-            updateAlert(error.msg)
-            setTimeout(() => {
-                setErrorKey('')
-
-            }, 5000)
 
         } else {
             const error = await response.json()
@@ -127,7 +113,20 @@ export default function Login() {
 
                             <Input startDecorator={<MdKey />} onChange={e => setPassword(e.target.value)} type='password' size='sm' placeholder="••••••••" variant="outlined" />
                         </div>
-                        <Checkbox size='sm' label='Remember next time?' />
+
+                        <Checkbox size='sm'
+                            onChange={() => {
+                                remember ?
+                                    setRemember(false) :
+                                    setRemember(true)
+                            }}
+                            label={
+                                <>
+                                    <Typography level='body-md'>Remember Password?</Typography>
+                                </>
+                            } />
+
+
                         {fetching ?
                             <Button size='sm' className={styles.loginButton} variant='soft' loading>Loading</Button> :
                             <Button onClick={() => loginUser()} className={styles.loginButton} variant='soft' size='sm'>Sign In</Button>}
