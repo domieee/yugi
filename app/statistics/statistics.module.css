@@ -1,16 +1,13 @@
 .chartWrapper {
-    max-width: 500px;
+    min-width: 400px;
     display: flex;
     align-items: center;
-    align-self: center;
+    justify-content: center;
 }
 
-.chartWrapper > canvas {
-    margin-inline: auto;
-}
 
 .chartContainer {
-    margin-inline: auto;
+
     display: flex;
     align-items: center;
     justify-content: center;

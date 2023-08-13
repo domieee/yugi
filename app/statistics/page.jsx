@@ -51,7 +51,7 @@ export default async function Statistics() {
 
             <Grid container gap={2}>
                 <Grid xs={12} lg={4} item>
-                    <Sheet sx={{ height: '100%', borderRadius: '5px' }} variant="outlined" color="primary">
+                    <Sheet sx={{ height: '100%', borderRadius: '5px', display: 'flex', justifyContent: 'center' }} variant="outlined" color="primary">
                         <div className={styles.chartContainer} >
                             <div className={styles.chartWrapper}>
                                 <Chart data={overallBreakdown} />
@@ -71,7 +71,7 @@ export default async function Statistics() {
                 </Grid>
 
                 <Grid xs={6} lg={4} item>
-                    <Sheet sx={{ height: '100%', borderRadius: '5px' }} variant="outlined" color="primary" >
+                    <Sheet sx={{ height: '100%', borderRadius: '5px', display: 'flex', justifyContent: 'center' }} variant="outlined" color="primary" >
                         <div className={styles.chartContainer}>
                             <div className={styles.chartWrapper}>
                                 <Chart data={winnerBreakdown} />

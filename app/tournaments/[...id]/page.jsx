@@ -5,7 +5,7 @@ import styles from './id.module.css'
 import OuterWindowWrapper from "@/app/components/OuterWindowWrapper";
 import TournamentTreeRow from "@/app/components/TournamentTreeRow";
 
-import { Typography, Sheet } from "@mui/joy";
+import { Typography, Sheet, Grid } from "@mui/joy";
 import { GiCalendar, GiPlanetConquest, GiTabletopPlayers, GiTrophy, GiStack } from "react-icons/gi";
 
 export default async function SingleTournamentOverview({ params }) {
@@ -110,19 +110,19 @@ export default async function SingleTournamentOverview({ params }) {
                 <section>
                     <article>
                         <Typography component='h3' level='h3'>Informations</Typography>
-                        <div className={styles.statsWrapper}>
+                        <Grid gap={2} sx={{ flexGrow: 1 }} container className={styles.statsWrapper}>
                             <TournamentStats icon={<GiTrophy />} title={'Tournament Winner'} data={informations.players[0][0].name} />
                             <TournamentStats icon={<GiStack />} title={'Winning Deck'} data={informations.players[0][0].deck} />
                             <TournamentStats icon={<GiPlanetConquest />} title={'Location'} data={informations?.location} />
                             <TournamentStats icon={<GiCalendar />} title={'Date'} data={informations?.datetimes.UIDate} />
                             <TournamentStats icon={<GiTabletopPlayers />} title={'Total Participants'} data={informations?.totalParticipants} />
-                        </div>
+                        </Grid>
                     </article>
                 </section>
 
                 <section>
                     <article className={styles.chartTableContainer}>
-                        <Sheet variant='outlined' color='primary' className={styles.chartWrapper}>
+                        <Sheet variant='outlined' color='primary' sx={{ display: 'flex', alignItems: 'center' }} className={styles.chartWrapper}>
                             <div className={styles.chartContainer}>
                                 {isServerReady && breakdown.length === 3 ? <Chart data={breakdown} /> : null}
                             </div>
@@ -144,7 +144,7 @@ export default async function SingleTournamentOverview({ params }) {
                     {tournamentTree[5]?.length > 0 ? <TournamentTreeRow data={tournamentTree[5]} xs={'top32'} title={'Top 32'} expandedStatus={false} /> : null}
                     {tournamentTree[6]?.length > 0 ? <TournamentTreeRow data={tournamentTree[6]} xs={'top64'} title={'Top 64'} expandedStatus={false} /> : null}
                 </section>
-            </OuterWindowWrapper>
+            </OuterWindowWrapper >
         </>
     )
 }
