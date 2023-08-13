@@ -134,6 +134,7 @@ export default function Login() {
                         {fetching ?
                             <Button size='sm' className={styles.loginButton} variant='soft' loading>Loading</Button> :
                             <Button onClick={() => loginUser()} className={styles.loginButton} variant='soft' size='sm'>Sign In</Button>}
+                        <Divider sx={{ marginBottom: '10px' }} />
                         <Typography className={styles.register} level='body-xs'><Link href='/register'> Not registered yet?</Link></Typography>
                     </form>
                 </article>
