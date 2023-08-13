@@ -23,6 +23,7 @@ export default function Login() {
     const [remember, setRemember] = useState(false)
     const [fetching, setFetching] = useState(false)
 
+    const [error, setError] = useState({ msg: '', key: '' })
     const setUserName = useStore((state) => state.setUserName)
     const setUserID = useStore((state) => state.setUserID)
     const setUserRole = useStore((state) => state.setUserRole)
@@ -91,9 +92,10 @@ export default function Login() {
 
         } else if (response.status === 400) {
             setFetching(false)
-            const error = await response.json()
-            console.log(error)
 
+            const error = await response.json()
+            setError(error)
+            console.log(error)
         } else {
             const error = await response.json()
             console.log(error)
@@ -108,29 +110,32 @@ export default function Login() {
                     <Divider />
                     <form method="post" className={styles.form}>
                         <div className={styles.inputWrapper}>
-                            <label htmlFor="email"><Typography>E-Mail or username</Typography></label>
-                            <Input startDecorator={<MdPerson2 />} onChange={e => setUsername(e.target.value)} size='sm' placeholder="johndoe@mail.com" variant="outlined" />
+                            <Typography component='label' htmlFor='email' level='body-md'>E-Mail or username</Typography>
+                            <Input name='email' color={error.key === 'email' || error.key === 'mailOrPassword' ? 'danger' : 'neutral'} startDecorator={<MdPerson2 />} onChange={e => setUsername(e.target.value)} size='sm' placeholder="johndoe@mail.com" variant="outlined" />
+                            {error.key === 'email' ? <Typography level='body-sm' color='danger'>{error.msg}</Typography> : null}
                         </div>
                         <div className={styles.inputWrapper}>
-                            <div className={styles.passwordRow}>
-                                <label htmlFor="password"><Typography>Password</Typography></label>
-                            </div>
-
-                            <Input startDecorator={<MdKey />} onChange={e => setPassword(e.target.value)} type='password' size='sm' placeholder="••••••••" variant="outlined" />
+                            <Typography component='label' htmlFor='email' level='body-md'>Password</Typography>
+                            <Input color={error.key === 'password' || error.key === 'mailOrPassword' ? 'danger' : 'neutral'} startDecorator={<MdKey />} onChange={e => setPassword(e.target.value)} type='password' size='sm' placeholder="••••••••••••" variant="outlined" />
+                            {error.key === 'password' || error.key === 'mailOrPassword' ? <Typography level='body-sm' color='danger'>{error.msg}</Typography> : null}
                         </div>
+                        <div style={{ display: 'flex', alignItems: 'center' }}>
 
-                        <Checkbox size='sm'
-                            sx={{ marginBlock: 'auto' }}
-                            onChange={() => {
-                                remember ?
-                                    setRemember(false) :
-                                    setRemember(true)
-                            }}
-                            label={
-                                <>
-                                    <Typography level='body-md'>Remember Password?</Typography>
-                                </>
-                            } />
+                            <Checkbox
+                                color="primary"
+                                label={
+                                    <Typography sx={{
+                                        marginBottom: 'auto'
+                                    }} level='body-xs'>Remember password?</Typography>
+                                }
+                                size="sm"
+                                onChange={() => {
+                                    remember ?
+                                        setRemember(false) :
+                                        setRemember(true)
+                                }} />
+
+                        </div>
                         {fetching ?
                             <Button size='sm' className={styles.loginButton} variant='soft' loading>Loading</Button> :
                             <Button onClick={() => loginUser()} className={styles.loginButton} variant='soft' size='sm'>Sign In</Button>}

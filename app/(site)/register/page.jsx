@@ -7,19 +7,40 @@ import { MdPerson2, MdKey, MdEmail } from 'react-icons/md';
 import Link from "next/link";
 import { useState } from "react";
 import PasswordMeter from "./PasswordMeter";
+import Cookies from "js-cookie";
+
+import { useRouter } from "next/navigation";
+
+import { useStore } from '@/app/stores/userStore';
 
 export default function Register() {
     const [fetching, setFetching] = useState(false)
 
-    const [userInformation, setUserInformation] = useState({
-        username: '',
-        email: '',
-        password: '',
-        confirmPassword: ''
-    })
+    const [email, setEmail] = useState('')
+    const [username, setUsername] = useState('')
+    const [password, setPassword] = useState('')
+    const [confirmPassword, setConfirmPassword] = useState('')
+
+    const [error, setError] = useState({ msg: '', key: '' })
+
+    const setUserName = useStore((state) => state.setUserName)
+    const setUserID = useStore((state) => state.setUserID)
+    const setUserRole = useStore((state) => state.setUserRole)
+
+    const router = useRouter()
 
     const sendRegisterData = async () => {
+
         setFetching(true)
+
+        const requestBody = {
+            username: String(username),
+            email: String(email),
+            password: String(password),
+            confirmPassword: String(confirmPassword),
+        }
+
+        console.log(requestBody)
 
         const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/register`, {
             method: 'POST',
@@ -27,19 +48,14 @@ export default function Register() {
                 "Access-Control-Allow-Origin": '*',
                 "Content-Type": "application/json; charset=UTF-8"
             },
-            body: JSON.stringify({
-                username: userInformation.username,
-                email: userInformation.email,
-                password: userInformation.password,
-                confirmPassword: userInformation.confirmPassword,
-            })
+            body: JSON.stringify(requestBody)
         })
 
         if (response.status === 200) {
             const json = await response.json()
 
-            Cookies.set('token', json, { expires: 7 })
-            const currentToken = Cookies.get('token');
+            Cookies.set('userToken', json, { expires: 1 })
+            const currentToken = Cookies.get('userToken');
 
             const userInformation = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/receive-user-informations`, {
                 method: 'POST',
@@ -54,32 +70,25 @@ export default function Register() {
 
             if (userInformation.status === 200) {
                 const json = await userInformation.json()
+
+                setFetching(false)
+
                 await setUserName(json.username)
                 await setUserID(json.id)
                 await setUserRole(json.role)
-                setSuccessOpen(true)
-                setTimeout(() => {
-                    setFetching(false)
-                    router.push('/');
-                }, 1000)
+
+                router.push('/');
 
             } else if (userInformation.status === 400) {
-                const json = await response.json()
-                console.log(json)
+                const error = await response.json()
+                console.log(error)
             }
 
         } else if (response.status === 400) {
-            const error = await response.json()
-            console.log(error)
             setFetching(false)
-            setErrorMessage(error.msg)
-            setErrorKey(error.key)
-            setAlertOpen(true)
-            setTimeout(() => {
-                setErrorKey('')
-            }, 5000)
-
-            console.log(errorMessage)
+            const error = await response.json()
+            setError(error)
+            console.log("🚀 ~ file: page.jsx:77 ~ sendRegisterData ~ error:", error)
         } else {
             const json = await response.json()
             console.log(json)
@@ -93,27 +102,27 @@ export default function Register() {
                     <Divider />
                     <form method="post" className={styles.form}>
                         <div className={styles.inputWrapper}>
-                            <label htmlFor="username"><Typography>Username</Typography></label>
-                            <Input startDecorator={<MdPerson2 />} onChange={e => setUserInformation({ username: e.target.value })} size='sm' placeholder="johndoe" variant="outlined" />
+                            <Typography component='label' htmlFor='username' level="body-md">Username</Typography>
+                            <Input color={error.key === 'username' ? 'danger' : 'neutral'} name='username' startDecorator={<MdPerson2 />} onChange={e => {
+                                setUsername(e.target.value)
+                                console.log(username)
+                            }} size='sm' placeholder="johndoe" variant="outlined" />
+                            {error.key === 'username' ? <Typography level="body-sm" color="danger">{error.msg}</Typography> : null}
                         </div>
                         <div className={styles.inputWrapper}>
-                            <label htmlFor="email"><Typography>E-Mail</Typography></label>
-                            <Input startDecorator={<MdEmail />} onChange={e => setUsername({ email: e.target.value })} size='sm' placeholder="johndoe@mail.com" variant="outlined" />
+                            <Typography component='label' htmlFor='email' level="body-md">E-Mail</Typography>
+                            <Input color={error.key === 'email' ? 'danger' : 'neutral'} name="email" startDecorator={<MdEmail />} onChange={e => setEmail(e.target.value)} size='sm' placeholder="johndoe@mail.com" variant="outlined" />
+                            {error.key === 'email' ? <Typography level="body-sm" color="danger">{error.msg}</Typography> : null}
                         </div>
-                        <div
-                            id={styles.passwordMeter}
-                            className={styles.inputWrapper}>
-                            <div className={styles.passwordRow}>
-                                <label htmlFor="password"><Typography>Password</Typography></label>
-                            </div>
-                            <PasswordMeter userInformation={userInformation} setUserInformation={setUserInformation} />
+                        <div id={styles.passwordMeter} className={styles.inputWrapper}>
+                            <Typography component='label' htmlFor='password' level="body-md">Password</Typography>
+                            <PasswordMeter userInformation={password} setUserInformation={setPassword} error={error} />
                         </div>
 
-                        <div
-                            id={styles.confirmPassword}
-                            className={styles.inputWrapper}>
-                            <label htmlFor="confimPassword"><Typography>Confirm Password</Typography></label>
-                            <Input startDecorator={<MdKey />} onChange={e => setUsername({ confirmPassword: e.target.value })} size='sm' placeholder="••••••••••••" variant="outlined" />
+                        <div id={styles.confirmPassword} className={styles.inputWrapper}>
+                            <Typography component='label' htmlFor='confirmPassword' level="body-md">Confirm Password</Typography>
+                            <Input color={error.key === 'confirmPassword' || error.key === 'repeatPassword' ? 'danger' : 'neutral'} name="confirmPassword" startDecorator={<MdKey />} onChange={e => setConfirmPassword(e.target.value)} size='sm' placeholder="••••••••••••" variant="outlined" />
+                            {error.key === 'confirmPassword' || error.key === 'repeatPassword' ? <Typography level="body-sm" color="danger">{error.msg}</Typography> : null}
                         </div>
 
                         {fetching ?

@@ -7,13 +7,18 @@ import { MdKey } from 'react-icons/md';
 
 import styles from './register.module.css'
 
-export default function PasswordMeter({ userInformation, setUserInformation }) {
+export default function PasswordMeter({ userInformation, setUserInformation, error }) {
     const minLength = 12;
+
+    const handlePasswordChange = (event) => {
+        setUserInformation(event.target.value);
+    };
+
     return (
         <Stack
             spacing={0.5}
             sx={{
-                '--hue': Math.min(userInformation.password.length * 10, 120),
+                '--hue': Math.min(userInformation.length * 10, 120),
             }}
         >
             <Input
@@ -21,14 +26,15 @@ export default function PasswordMeter({ userInformation, setUserInformation }) {
                 type="password"
                 placeholder="••••••••••••"
                 startDecorator={<MdKey />}
-
+                color={error.key === 'password' || error.key === 'repeatPassword' ? 'danger' : 'neutral'}
                 value={userInformation.password}
-                onChange={(event) => setUserInformation({ password: event.target.value })}
+                onChange={handlePasswordChange} // Use the updated handler
             />
+            {error.key === 'password' ? <Typography level="body-sm" color="danger">{error.msg}</Typography> : null}
             <LinearProgress
                 determinate
                 size="sm"
-                value={Math.min((userInformation.password.length * 100) / minLength, 100)}
+                value={Math.min((userInformation.length * 100) / minLength, 100)}
                 sx={{
                     bgcolor: 'background.level3',
                     color: 'hsl(var(--hue) 80% 40%)',
@@ -38,10 +44,10 @@ export default function PasswordMeter({ userInformation, setUserInformation }) {
                 level="body-xs"
                 sx={{ alignSelf: 'flex-end', color: 'hsl(var(--hue) 80% 30%)' }}
             >
-                {userInformation.password.length < 3 && 'Very weak'}
-                {userInformation.password.length >= 3 && userInformation.password.length < 6 && 'Weak'}
-                {userInformation.password.length >= 6 && userInformation.password.length < 10 && 'Strong'}
-                {userInformation.password.length >= 10 && 'Very strong'}
+                {userInformation.length < 3 && 'Very weak'}
+                {userInformation.length >= 3 && userInformation.length < 6 && 'Weak'}
+                {userInformation.length >= 6 && userInformation.length < 10 && 'Strong'}
+                {userInformation.length >= 10 && 'Very strong'}
             </Typography>
         </Stack>
     );

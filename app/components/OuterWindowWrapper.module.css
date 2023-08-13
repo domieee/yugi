@@ -1,5 +1,5 @@
 .wrapper {
     margin-inline: auto;
     max-width: 1480px;
-    min-height: 100%;
+    min-height: 100svh;
 }
