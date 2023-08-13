@@ -4,6 +4,7 @@ import { Inter } from 'next/font/google'
 import Navigation from './components/Navigation'
 
 import { CssVarsProvider } from '@mui/joy/styles';
+import Footer from './components/Footer';
 
 
 const inter = Inter({ subsets: ['latin'] })
@@ -25,6 +26,7 @@ export default function RootLayout({ children }) {
           <main>
             {children}
           </main>
+          <Footer />
         </CssVarsProvider>
 
       </body>
