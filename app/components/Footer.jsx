@@ -25,13 +25,25 @@ export default function Footer() {
                         sx={{
                             display: 'flex',
                             flexDirection: 'column',
+                            maxWidth: '250px',
+                            height: '100%'
+                        }}>
+                        <Link level='body-sm' href='/imprint'>Imprint</Link>
+                        <Link level='body-sm' href='/privacy-policy'>Privacy Policy</Link>
+                        <GiFoxTail style={{ marginInline: 'auto', alignSelf: 'flex-end' }} />
+                    </Box>
+                    <Divider orientation='vertical' />
+
+                    <Box
+                        sx={{
+                            display: 'flex',
+                            flexDirection: 'column',
                             maxWidth: '250px'
                         }}>
-
-                        <Link href='/imprint'>Imprint</Link>
-                        <Link href='/privacy-policy'>Privacy Policy</Link>
-                        <GiFoxTail />
+                        <Link level='body-sm' href='/imprint'>Tournaments</Link>
+                        <Link level='body-sm' href='/privacy-policy'>Statistics</Link>
                     </Box>
+                    <Divider orientation='vertical' />
 
                     <Box
                         sx={{
@@ -40,10 +52,12 @@ export default function Footer() {
                             maxWidth: '250px'
                         }}>
                         <Typography
-                            variant='body-sm'
-                            marginBottom='10px'
-                        >We are constantly working on improving this website. Do you have any suggestions for improvement, or would you like to support the project? Follow the links below.</Typography>
+                            level='body-xs'
+                            marginBottom='10px'>
+                            We are constantly working on improving this website. Do you have any suggestions for improvement, or would you like to support the project? Follow the links below.
+                        </Typography>
                         <Link href='/feedback'
+                            level='body-sm'
                             style={{ marginBottom: '10px' }}>
                             Write a feedback
                         </Link>
