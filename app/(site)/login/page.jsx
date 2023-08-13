@@ -12,7 +12,7 @@ import { useStore } from '@/app/stores/userStore';
 import Cookies from 'js-cookie';
 import { useRouter } from 'next/navigation';
 
-import { Typography } from '@mui/joy';
+import { Divider, Typography } from '@mui/joy';
 import { useState } from 'react';
 import { MdPerson2, MdKey } from 'react-icons/md';
 
@@ -30,12 +30,16 @@ export default function Login() {
     const router = useRouter()
 
     const loginUser = async () => {
+
+        // Set the state for controlling the loading UI to true
+        setFetching(true)
+
+        // Create our request body body and send it to the server
         const requestBody = {
             mailOrName: String(username),
             password: String(password)
         }
 
-        setFetching(true)
         const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/login`, {
             method: 'POST',
             headers: {
@@ -50,8 +54,8 @@ export default function Login() {
 
             // In case the checkbox for remembering the password is active, the token expires after one year, otherwise after one day.
             remember ?
-                Cookies.set('userToken', json, { expires: 365 }) :
-                Cookies.set('userToken', json, { expires: 1 })
+                Cookies.set('userToken', json, { expires: 365 }, { secure: true }) :
+                Cookies.set('userToken', json, { expires: 1 }, { secure: true })
 
             // Receive the user information by sending the token to the server and resolving it there.
             const currentToken = Cookies.get('userToken')
@@ -70,7 +74,7 @@ export default function Login() {
             if (userInformation.status === 200) {
                 const json = await userInformation.json()
 
-                // If we received the user information successfully, we write it in our user store and handle the UI states
+                // If we received the user information successfully, we write it in the user store and handle the UI states
                 setFetching(false)
                 await setUserName(json.username)
                 await setUserID(json.id)
@@ -90,17 +94,18 @@ export default function Login() {
             const error = await response.json()
             console.log(error)
 
-
         } else {
             const error = await response.json()
             console.log(error)
         }
     }
+
     return (
         <OuterWindowWrapper>
             <section className={styles.loginWrapper}>
                 <article className={styles.loginContainer}>
                     <h2>Login</h2>
+                    <Divider />
                     <form method="post" className={styles.form}>
                         <div className={styles.inputWrapper}>
                             <label htmlFor="email"><Typography>E-Mail or username</Typography></label>
@@ -115,6 +120,7 @@ export default function Login() {
                         </div>
 
                         <Checkbox size='sm'
+                            sx={{ marginBlock: 'auto' }}
                             onChange={() => {
                                 remember ?
                                     setRemember(false) :
@@ -125,12 +131,10 @@ export default function Login() {
                                     <Typography level='body-md'>Remember Password?</Typography>
                                 </>
                             } />
-
-
                         {fetching ?
                             <Button size='sm' className={styles.loginButton} variant='soft' loading>Loading</Button> :
                             <Button onClick={() => loginUser()} className={styles.loginButton} variant='soft' size='sm'>Sign In</Button>}
-                        <Typography className={styles.register} level='body-xs'><Link href='/register'> Already registered? </Link></Typography>
+                        <Typography className={styles.register} level='body-xs'><Link href='/register'> Not registered yet?</Link></Typography>
                     </form>
                 </article>
             </section>

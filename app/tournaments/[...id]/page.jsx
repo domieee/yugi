@@ -5,10 +5,17 @@ import styles from './id.module.css'
 import OuterWindowWrapper from "@/app/components/OuterWindowWrapper";
 import TournamentTreeRow from "@/app/components/TournamentTreeRow";
 
-import { Typography, Sheet, Grid } from "@mui/joy";
+import { Typography, Sheet, Grid, Divider } from "@mui/joy";
 import { GiCalendar, GiPlanetConquest, GiTabletopPlayers, GiTrophy, GiStack } from "react-icons/gi";
 
+
+
 export default async function SingleTournamentOverview({ params }) {
+
+    function capitalizeFirstLetter() {
+        return informations.tournamentType.charAt(0).toUpperCase() + informations.tournamentType.slice(1);
+    }
+
     const fetchInformations = async () => {
         try {
             const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/tournament-overview`, {
@@ -91,16 +98,8 @@ export default async function SingleTournamentOverview({ params }) {
         }
     };
 
-    function capitalizeFirstLetter() {
-        return informations.tournamentType.charAt(0).toUpperCase() + informations.tournamentType.slice(1);
-    }
-
-
-
     const informations = await fetchInformations()
-
     const breakdown = await fetchTournamentBreakdown()
-
     const tournamentTree = await fetchTournamentTree()
 
     return (
@@ -110,6 +109,7 @@ export default async function SingleTournamentOverview({ params }) {
                 <section>
                     <article>
                         <Typography component='h3' level='h3'>Informations</Typography>
+                        <Divider sx={{ marginBottom: '10px' }} />
                         <Grid gap={2} sx={{ flexGrow: 1 }} container className={styles.statsWrapper}>
                             <TournamentStats icon={<GiTrophy />} title={'Tournament Winner'} data={informations.players[0][0].name} />
                             <TournamentStats icon={<GiStack />} title={'Winning Deck'} data={informations.players[0][0].deck} />
