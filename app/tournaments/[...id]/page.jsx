@@ -136,6 +136,7 @@ export default async function SingleTournamentOverview({ params }) {
 
                 <section>
                     <Typography component='h3' level='h3'> Tournament Tree</Typography>
+                    <Divider sx={{ marginBottom: '10px' }} />
                     {tournamentTree[0]?.length > 0 ? <TournamentTreeRow data={tournamentTree[0]} xs={'firstPlace'} title={'First Place'} expandedStatus={true} /> : null}
                     {tournamentTree[1]?.length > 0 ? <TournamentTreeRow data={tournamentTree[1]} xs={'secondPlace'} title={'Second Place'} expandedStatus={true} /> : null}
                     {tournamentTree[2]?.length > 0 ? <TournamentTreeRow data={tournamentTree[2]} xs={'top4'} title={'Top 4'} expandedStatus={true} /> : null}
