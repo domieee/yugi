@@ -32,11 +32,12 @@ export default function Interface() {
     const handleCitySearch = async (newInputValue) => {
         setFetching(true)
         setCityOptions([])
-        const data = await fetch(`http://api.geonames.org/searchJSON?name=${newInputValue}&username=domieee&maxRows=100`)
+        const data = await fetch(`https://cityserver.onrender.com/?searchValue=New+York`)
 
         console.log(cityOptions)
 
         const cityData = await data.json()
+        console.log("🚀 ~ file: page.jsx:40 ~ handleCitySearch ~ cityData:", cityData)
 
         if (newInputValue.length === 0) {
             setCityOptions(citys)
@@ -122,20 +123,11 @@ export default function Interface() {
                                     },
                                 }}
                                 sx={{ width: '100%' }}
-                                options={cityOptions} // Use the state variable to set options
+                                options={cityOptions ? cityOptions : null} // Use the state variable to set options
                                 autoHighlight
                                 getOptionLabel={(option) => option.name}
                                 renderOption={(props, option) => (
                                     <AutocompleteOption {...props}>
-                                        <ListItemDecorator>
-                                            <img
-                                                loading="lazy"
-                                                width="20"
-                                                src={option?.countryCode ? `https://flagcdn.com/w20/${option.countryCode.toLowerCase()}.png` : null}
-                                                srcSet={option?.countryCode ? `https://flagcdn.com/w40/${option.countryCode.toLowerCase()}.png 2x` : null}
-                                                alt=""
-                                            />
-                                        </ListItemDecorator>
                                         <ListItemContent sx={{ fontSize: 'sm' }}>
                                             {option.name}
                                         </ListItemContent>

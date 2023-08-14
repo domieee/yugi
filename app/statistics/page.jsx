@@ -48,23 +48,6 @@ export default async function Statistics() {
         <OuterWindowWrapper>
             <Typography level='h2' component='h2'>Statistics</Typography>
 
-            <Typography level='h3' component='h3'>Overall Breakdown</Typography>
-            <Divider sx={{ marginBottom: '10px' }} />
-            <Grid container gap={2}>
-                <Grid xs={12} lg={4} item>
-                    <Sheet sx={{ height: '100%', borderRadius: '5px', display: 'flex', justifyContent: 'center' }} variant="outlined" color="primary">
-                        <div className={styles.chartContainer} >
-                            <div className={styles.chartWrapper}>
-                                <Chart data={overallBreakdown} />
-                            </div>
-                        </div>
-                    </Sheet>
-                </Grid>
-
-                <Grid sx={{ width: '100%' }} xs={12} lg={7.8} item>
-                    <TableMUI data={overallBreakdown} />
-                </Grid>
-            </Grid>
             <Typography level='h3' component='h3'>Winner Breakdown</Typography>
             <Divider sx={{ marginBottom: '10px' }} />
             <Grid container gap={2}>
@@ -82,6 +65,25 @@ export default async function Statistics() {
                     </Sheet>
                 </Grid>
             </Grid>
+
+            <Typography level='h3' component='h3'>Overall Breakdown</Typography>
+            <Divider sx={{ marginBottom: '10px' }} />
+            <Grid container gap={2}>
+                <Grid xs={12} lg={4} item>
+                    <Sheet sx={{ height: '100%', borderRadius: '5px', display: 'flex', justifyContent: 'center' }} variant="outlined" color="primary">
+                        <div className={styles.chartContainer} >
+                            <div className={styles.chartWrapper}>
+                                <Chart data={overallBreakdown} />
+                            </div>
+                        </div>
+                    </Sheet>
+                </Grid>
+
+                <Grid sx={{ width: '100%' }} xs={12} lg={7.8} item>
+                    <TableMUI data={overallBreakdown} />
+                </Grid>
+            </Grid>
+
 
         </OuterWindowWrapper>
     )
