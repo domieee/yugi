@@ -123,20 +123,12 @@ export default function Interface() {
                                     },
                                 }}
                                 sx={{ width: '100%' }}
-                                options={cityOptions ? cityOptions : null} // Use the state variable to set options
+                                options={cityOptions} // Use the state variable to set options
                                 autoHighlight
                                 getOptionLabel={(option) => option.name}
                                 renderOption={(props, option) => (
                                     <AutocompleteOption {...props}>
-                                        <ListItemDecorator>
-                                            <img
-                                                loading="lazy"
-                                                width="20"
-                                                src={`https://flagcdn.com/w20/${option.countryCode.toLowerCase()}.png`}
-                                                srcSet={`https://flagcdn.com/w40/${option.countryCode.toLowerCase()}.png 2x`}
-                                                alt=""
-                                            />
-                                        </ListItemDecorator>
+
                                         <ListItemContent sx={{ fontSize: 'sm' }}>
                                             {option.name}
                                         </ListItemContent>
