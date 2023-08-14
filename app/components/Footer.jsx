@@ -36,7 +36,7 @@ export default function Footer() {
                                 <GiFoxHead style={{ width: '25px', height: '25px' }} />
                             </div>
                             <Link level='body-sm' color='neutral' href='/imprint'>Imprint</Link>
-                            <Link level='body-sm' color='neutral' href='/privacy-policy'>Privacy Policy</Link>
+                            <Link level='body-sm' color='neutral' href='/privacy-policy'>Privacy</Link>
 
                         </Box>
                     </div>
