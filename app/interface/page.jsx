@@ -16,6 +16,8 @@ export default function Interface() {
 
     const tournamentStore = useTournamentStore(state => state)
 
+    const [value, setValue] = useState(tournamentStore.tournamentType === 'national' ? countries[0] : citys[0]);
+
     console.log(countries)
 
     const inputRef = useRef(null)
@@ -76,6 +78,12 @@ export default function Interface() {
                                 color="primary"
                                 id="country-select-demo"
                                 placeholder="Choose a country"
+                                defaultValue={countries[0]}
+                                onChange={(event, newValue) => {
+                                    tournamentStore.setLocation(newValue)
+
+                                    console.log(tournamentStore.location)
+                                }}
                                 slotProps={{
                                     input: {
                                         autoComplete: 'new-password', // disable autocomplete and autofill
@@ -85,6 +93,7 @@ export default function Interface() {
                                 options={countries}
                                 autoHighlight
                                 getOptionLabel={(option) => option.label}
+
                                 renderOption={(props, option) => (
                                     <AutocompleteOption {...props}>
                                         <ListItemDecorator>
@@ -96,7 +105,8 @@ export default function Interface() {
                                                 alt=""
                                             />
                                         </ListItemDecorator>
-                                        <ListItemContent sx={{ fontSize: 'sm' }}>
+                                        <ListItemContent
+                                            sx={{ fontSize: 'sm' }}>
                                             {option.label}
                                         </ListItemContent>
                                     </AutocompleteOption>
@@ -111,6 +121,7 @@ export default function Interface() {
                                     variant="outlined"
                                 /> :
                                     null}
+                                defaultValue={citys[0]}
                                 size="sm"
                                 color="primary"
                                 id="country-select-demo"
@@ -132,8 +143,8 @@ export default function Interface() {
                                             <img
                                                 loading="lazy"
                                                 width="20"
-                                                src={`https://flagcdn.com/w20/${option.countryCode.toLowerCase()}.png`}
-                                                srcSet={`https://flagcdn.com/w40/${option.countryCode.toLowerCase()}.png 2x`}
+                                                src={option.countryCode ? `https://flagcdn.com/w40/${option.countryCode.toLowerCase()}.png` : null}
+                                                srcSet={option.countryCode ? `https://flagcdn.com/w40/${option.countryCode.toLowerCase()}.png 2x` : null}
                                                 alt=""
                                             />
                                         </ListItemDecorator>
