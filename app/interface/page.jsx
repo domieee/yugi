@@ -27,25 +27,34 @@ export default function Interface() {
     const [fetching, setFetching] = useState(false)
 
     const handleTournamentTypeChange = (newValue) => {
-        console.log(newValue)
         tournamentStore.setTournamentType(newValue)
     }
 
-    const handleCitySearch = async (newInputValue) => {
-        setFetching(true)
+    const handleDataFetch = async (newInputValue) => {
         setCityOptions([])
+        setFetching(true)
+
         const data = await fetch(`https://cityserver.onrender.com/?searchValue=${newInputValue}`)
 
         console.log(cityOptions)
 
         const cityData = await data.json()
-        console.log("🚀 ~ file: page.jsx:40 ~ handleCitySearch ~ cityData:", cityData)
+
+        return cityData
+    }
+
+    const handleCitySearch = async (newInputValue) => {
+        setCityOptions([])
+
+        const cityData = await handleDataFetch(newInputValue)
 
         if (newInputValue.length === 0) {
             setCityOptions(citys)
-        } else {
-            setCityOptions(cityData.geonames)
+            setFetching(false)
+            return
         }
+
+        setCityOptions(cityData.geonames)
         setFetching(false)
     }
 
@@ -56,6 +65,9 @@ export default function Interface() {
             <Typography level='h3' component='h3'>Create new Tournament</Typography>
 
             <Grid container className={styles.container} gap={2}>
+
+                {/* # Tournament Type Selection */}
+
                 <Grid item lg={2.9} xs={12}>
                     <Sheet className={styles.itemContainer} variant="soft" color="primary">
                         <Typography className={styles.heading} level="body-xs">Tournament Type</Typography>
@@ -69,9 +81,18 @@ export default function Interface() {
                         </Select>
                     </Sheet>
                 </Grid>
+
+                {/* # Location Selection */}
+
                 <Grid item lg={2.9} xs={12}>
                     <Sheet variant="soft" className={styles.itemContainer} color="primary">
                         <Typography className={styles.heading} level="body-xs">Location</Typography>
+
+                        {/* Depending on which value is selected in the thze tournament type select, we render either:
+                            - Autocomplete with country data
+                            - Autocomplete with city data
+                        */}
+
                         {tournamentStore.tournamentType === 'national' ?
                             <Autocomplete
                                 size="sm"
@@ -81,12 +102,11 @@ export default function Interface() {
                                 defaultValue={countries[0]}
                                 onChange={(event, newValue) => {
                                     tournamentStore.setLocation(newValue)
-
                                     console.log(tournamentStore.location)
                                 }}
                                 slotProps={{
                                     input: {
-                                        autoComplete: 'new-password', // disable autocomplete and autofill
+                                        autoComplete: 'new-password',
                                     },
                                 }}
                                 sx={{ width: '100%' }}
@@ -121,7 +141,6 @@ export default function Interface() {
                                     variant="outlined"
                                 /> :
                                     null}
-                                defaultValue={citys[0]}
                                 size="sm"
                                 color="primary"
                                 id="country-select-demo"
@@ -130,14 +149,18 @@ export default function Interface() {
                                 placeholder="Choose a city"
                                 slotProps={{
                                     input: {
-                                        autoComplete: 'new-password', // disable autocomplete and autofill
+                                        autoComplete: 'new-password',
                                     },
                                 }}
                                 sx={{ width: '100%' }}
-                                options={cityOptions} // Use the state variable to set options
+                                options={cityOptions}
                                 autoHighlight
                                 getOptionLabel={(option) => option.name}
+                                getOptionSelected={(option, value) => option.name === value.name}
                                 renderOption={(props, option) => (
+
+                                    // TODO: Some of the menu options stay on top on the menu, even if the searching value is not equal to them
+
                                     <AutocompleteOption {...props}>
                                         <ListItemDecorator>
                                             <img
@@ -154,9 +177,11 @@ export default function Interface() {
                                     </AutocompleteOption>
                                 )}
                             />}
-
                     </Sheet>
                 </Grid>
+
+                {/* # Date Selection */}
+
                 <Grid item lg={2.9} xs={12}>
                     <Sheet variant="soft" className={styles.itemContainer} color="primary">
                         <Typography className={styles.heading} level="body-xs">Tournament Date</Typography>
@@ -165,6 +190,10 @@ export default function Interface() {
                             type="date"
                             variant="outlined"
                             color="primary"
+                            onChange={(event) => {
+                                tournamentStore.setDate(event.target.value)
+                                console.log(tournamentStore.date)
+                            }}
                             slotProps={{
                                 input: {
                                     min: '2018-06-07T00:00',
@@ -174,6 +203,9 @@ export default function Interface() {
                         />
                     </Sheet>
                 </Grid>
+
+                {/* # Total Participants Selection */}
+
                 <Grid item lg={2.9} xs={12}>
                     <Sheet variant="soft" className={styles.itemContainer} color="primary">
                         <Typography className={styles.heading} level="body-xs">Total Participants</Typography>
@@ -181,7 +213,9 @@ export default function Interface() {
                             size="sm"
                             type="number"
                             color="primary"
-                            defaultValue={1}
+                            onChange={(event) => {
+                                tournamentStore.totalParticipants(event.target.value)
+                            }}
                             slotProps={{
                                 input: {
                                     ref: inputRef,

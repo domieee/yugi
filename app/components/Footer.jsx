@@ -1,7 +1,9 @@
 import React from 'react'
 import { Box, Divider, Link, Sheet, Typography } from '@mui/joy'
 import Image from 'next/image'
-import { GiFoxTail } from 'react-icons/gi'
+import { GiFoxHead } from 'react-icons/gi'
+
+import styles from './footer.module.css'
 
 export default function Footer() {
     return (
@@ -21,54 +23,70 @@ export default function Footer() {
                         justifyContent: 'space-between',
                         maxWidth: '1280px'
                     }}>
-                    <Box
-                        sx={{
-                            display: 'flex',
-                            flexDirection: 'column',
-                            maxWidth: '250px',
-                            height: '100%'
-                        }}>
-                        <Link level='body-sm' href='/imprint'>Imprint</Link>
-                        <Link level='body-sm' href='/privacy-policy'>Privacy Policy</Link>
-                        <GiFoxTail style={{ marginInline: 'auto', alignSelf: 'flex-end' }} />
-                    </Box>
-                    <Divider orientation='vertical' />
+                    <div style={{ display: 'flex' }}>
+                        <Divider orientation='vertical' sx={{ marginRight: '20px' }} />
+                        <Box
+                            sx={{
+                                display: 'flex',
+                                flexDirection: 'column',
+                                maxWidth: '250px',
+                                height: '100%'
+                            }}>
+                            <div style={{ width: '40px', height: '40px' }}>
+                                <GiFoxHead style={{ width: '25px', height: '25px' }} />
+                            </div>
+                            <Link level='body-sm' color='neutral' href='/imprint'>Imprint</Link>
+                            <Link level='body-sm' color='neutral' href='/privacy-policy'>Privacy Policy</Link>
 
-                    <Box
-                        sx={{
-                            display: 'flex',
-                            flexDirection: 'column',
-                            maxWidth: '250px'
-                        }}>
-                        <Link level='body-sm' href='/imprint'>Tournaments</Link>
-                        <Link level='body-sm' href='/privacy-policy'>Statistics</Link>
-                    </Box>
-                    <Divider orientation='vertical' />
+                        </Box>
+                    </div>
 
-                    <Box
-                        sx={{
-                            display: 'flex',
-                            flexDirection: 'column',
-                            maxWidth: '250px'
-                        }}>
-                        <Typography
-                            level='body-xs'
-                            marginBottom='10px'>
-                            We are constantly working on improving this website. Do you have any suggestions for improvement, or would you like to support the project? Follow the links below.
-                        </Typography>
-                        <Link href='/feedback'
-                            level='body-sm'
-                            style={{ marginBottom: '10px' }}>
-                            Write a feedback
-                        </Link>
-                        <a href="https://www.buymeacoffee.com/domiedev">
-                            <Image
-                                src='/bmc-button.png'
-                                alt='Buy me a Coffee Button'
-                                width={130}
-                                height={35} />
-                        </a>
-                    </Box>
+                    <div style={{ display: 'flex' }}>
+                        <Divider orientation='vertical' sx={{ marginRight: '20px' }} />
+                        <Box
+                            sx={{
+                                display: 'flex',
+                                flexDirection: 'column',
+                                maxWidth: '250px'
+                            }}>
+                            <Link level='body-sm' color='neutral' href='/imprint'>Tournaments</Link>
+                            <Link level='body-sm' color='neutral' href='/privacy-policy'>Statistics</Link>
+                        </Box>
+                    </div>
+
+                    <div style={{ display: 'flex' }}>
+                        <Divider color='danger' orientation='vertical' sx={{ marginRight: '20px' }} />
+                        <Box
+                            sx={{
+                                display: 'flex',
+                                flexDirection: 'column',
+                                maxWidth: '250px'
+                            }}>
+
+                            <Sheet className={styles.coffeeContainer} >
+                                <Typography
+                                    level='body-xs'
+                                    marginBottom='10px'>
+                                    We are constantly working on improving this website. Do you have any suggestions for improvement, or would you like to support the project? Follow the links below.
+                                </Typography>
+                                <Link
+                                    color='primary'
+                                    href='/feedback'
+                                    level='body-xs'
+                                    style={{ marginBottom: '10px' }}>
+                                    Write a feedback
+                                </Link>
+                                <a href="https://www.buymeacoffee.com/domiedev">
+                                    <Image
+                                        src='/bmc-button.png'
+                                        alt='Buy me a Coffee Button'
+                                        width={130}
+                                        height={35} />
+                                </a>
+                            </Sheet>
+
+                        </Box>
+                    </div>
                 </Box>
             </Sheet>
 

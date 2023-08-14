@@ -4,6 +4,8 @@ import { persist } from "zustand/middleware"
 import Cookies from 'js-cookie';
 import { useRouter } from 'next/navigation';
 
+import dayjs from 'dayjs';
+
 export const useInterfaceStore = create((set) => ({
     interfaceState: ['firstPlace', 'secondPlace', 'top4'],
     exampleArray: [

@@ -25,7 +25,7 @@
 }
 
 .chartTableContainer {
-    margin-block: 10px 25px;
+    margin-block: 5px 50px;
     gap: 20px;
     display: grid;
     align-items: center;

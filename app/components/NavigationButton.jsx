@@ -30,7 +30,7 @@ export default function NavigationButton() {
             <Link style={{ marginInlineStart: '50px' }} href='/login'>
                 <Tooltip size='sm' variant="outlined" color="primary" title='Login'>
                     <IconButton color="primary" size="sm" variant="outlined">
-                        <MdLogin color='#EAEEF6' />
+                        <MdLogin />
                     </IconButton>
                 </Tooltip>
             </Link> :

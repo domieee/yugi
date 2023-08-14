@@ -1,0 +1,5 @@
+.coffeeContainer {
+    display: flex;
+    border-radius: 5px;
+    flex-direction: column;
+}
