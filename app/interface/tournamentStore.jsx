@@ -51,14 +51,14 @@ export const useTournamentStore = create(
         totalParticipants: 0,
         date: '2023-07-07',
         firstPlace: [
-            { name: '', deck: '', deckNote: '', deckLink: '' }
+            { name: 'sdasds', deck: 'sdasds', deckNote: 'sdasds', deckLink: 'sdasds' }
         ],
         secondPlace: [
-            { name: '', deck: '', deckNote: '', deckLink: '' }
+            { name: 'sdasds', deck: 'sdasds', deckNote: 'sdasds', deckLink: 'sdasds' }
         ],
         top4: [
-            { name: '', deck: '', deckNote: '', deckLink: '' },
-            { name: '', deck: '', deckNote: '', deckLink: '' },
+            { name: 'sdasds', deck: 'sdasds', deckNote: 'sdasds', deckLink: 'sdasds' },
+            { name: 'sdasds', deck: 'sdasds', deckNote: 'sdasds', deckLink: 'sdasds' },
         ],
         top8: [
             { name: '', deck: '', deckNote: '', deckLink: '' },

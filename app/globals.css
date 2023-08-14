@@ -92,7 +92,12 @@ body {
 
 }
 
+* {
+  scrollbar-gutter: stable;
+}
+
 html {
+
   background-color: #121416;
 
 }

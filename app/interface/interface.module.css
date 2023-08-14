@@ -16,3 +16,81 @@
 .heading {
     margin-bottom: 5px;
 }
+
+.treeHeadingContainer {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-block: 5px;
+    padding-left: 20px;
+}
+
+.treeContainer {
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+.icon {
+    margin-right: 10px;
+}
+
+.treeHeading {
+    display: flex;
+    align-items: center;
+    gap: 7.5px;
+    
+}
+
+.treeHeadingDivider {
+    margin-bottom: 10px;
+}
+
+.buttonRow {
+    margin-block: 15px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.buttonControlsRow{
+
+}
+
+.modalButtonControl {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 10px;
+    gap: 10px;
+}
+
+.gridContainerNotExpanded {
+    display: none;
+    height: 0;
+    padding: 0;
+    transition: height 0.5s ease, padding 0.5s ease;
+}
+
+.gridContainerExpanded {
+    padding: 16px;
+    height: 100%;
+    transition: height 0.5s ease, padding 0.5s ease; /* Transition height and padding */
+}
+
+.gridItemContainer {
+    padding-block: 5px;
+    padding-left: 20px;
+    border-radius: 5px;
+}
+
+.gridItemContainer:hover {
+    background-color: var(--joy-palette-primary-800, #0A2744);
+    cursor: pointer;
+}
+
+.informationRow {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}

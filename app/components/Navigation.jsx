@@ -23,46 +23,50 @@ const NavigationButton = dynamic(() => import('./NavigationButton'), {
 export default function Navigation({ user }) {
 
     return (
-        <nav className={styles.container}>
-            <section className={styles.wrapper}>
+        <>
+            <nav className={styles.container}>
+                <section className={styles.wrapper}>
 
-                <Link href='/'>
-                    <div className={styles.logoContainer}>
-                        <GiFoxHead className={styles.logo} />
-                        <Typography>Duelist Meta</Typography>
-                    </div>
-                </Link>
+                    <Link href='/'>
+                        <div className={styles.logoContainer}>
+                            <GiFoxHead className={styles.logo} />
+                            <Typography>Duelist Meta</Typography>
+                        </div>
+                    </Link>
 
-                <section className={styles.linkBox}>
-                    <Tooltip size='sm' variant="outlined" color="primary" title='Watch all Tournaments'>
-                        <Link className={styles.link} href='/tournaments'>
-                            <MUI.Link
-                                color="primary"
-                                disabled={false}
-                                level="body-sm"
-                                underline="none"
-                                variant="plain"
-                                component='p'
-                            >Tournaments</MUI.Link>
-                        </Link>
-                    </Tooltip>
+                    <section className={styles.linkBox}>
+                        <Tooltip size='sm' variant="outlined" color="primary" title='Watch all Tournaments'>
+                            <Link className={styles.link} href='/tournaments'>
+                                <MUI.Link
+                                    paddingInline={2}
+                                    color="primary"
+                                    disabled={false}
+                                    level="body-sm"
+                                    underline="none"
+                                    variant="plain"
+                                    component='p'
+                                >Tournaments</MUI.Link>
+                            </Link>
+                        </Tooltip>
 
-                    <Tooltip size='sm' variant="outlined" color="primary" title='Watch Statistics'>
-                        <Link className={styles.link} href='/statistics'>
-                            <MUI.Link
-                                color="primary"
-                                disabled={false}
-                                level="body-sm"
-                                underline="none"
-                                variant="plain"
-                                component='p'
-                            >Statistics</MUI.Link>
-                        </Link>
-                    </Tooltip>
-                    <NavigationButton />
+                        <Tooltip size='sm' variant="outlined" color="primary" title='Watch Statistics'>
+                            <Link className={styles.link} href='/statistics'>
+                                <MUI.Link
+                                    paddingInline={2}
+                                    color="primary"
+                                    disabled={false}
+                                    level="body-sm"
+                                    underline="none"
+                                    variant="plain"
+                                    component='p'
+                                >Statistics</MUI.Link>
+                            </Link>
+                        </Tooltip>
+                        <NavigationButton />
+                    </section>
                 </section>
-
-            </section>
-        </nav >
+            </nav >
+            <MUI.Divider orientation='horizontal' />
+        </>
     )
 }

@@ -44,7 +44,6 @@
 
 .linkBox {
     display: flex;
-
     gap: 10px;
 }
 
@@ -52,7 +51,7 @@
     display: flex;
     align-items: center;
     border-radius: 5px;
-
+    margin-left: 5px;
 }
 
 

@@ -35,8 +35,8 @@ export default function Footer() {
                             <div style={{ width: '40px', height: '40px' }}>
                                 <GiFoxHead style={{ width: '25px', height: '25px' }} />
                             </div>
-                            <Link level='body-sm' color='neutral' href='/imprint'>Imprint</Link>
-                            <Link level='body-sm' color='neutral' href='/privacy-policy'>Privacy</Link>
+                            <Link level='body-sm' color='primary' variant='plain' href='/imprint'>Imprint</Link>
+                            <Link level='body-sm' color='primary' variant='plain' href='/privacy-policy'>Privacy</Link>
 
                         </Box>
                     </div>
@@ -49,8 +49,8 @@ export default function Footer() {
                                 flexDirection: 'column',
                                 maxWidth: '250px'
                             }}>
-                            <Link level='body-sm' color='neutral' href='/imprint'>Tournaments</Link>
-                            <Link level='body-sm' color='neutral' href='/privacy-policy'>Statistics</Link>
+                            <Link level='body-sm' color='primary' variant='plain' href='/imprint'>Tournaments</Link>
+                            <Link level='body-sm' color='primary' variant='plain' href='/privacy-policy'>Statistics</Link>
                         </Box>
                     </div>
 
@@ -70,10 +70,10 @@ export default function Footer() {
                                     We are constantly working on improving this website. Do you have any suggestions for improvement, or would you like to support the project? Follow the links below.
                                 </Typography>
                                 <Link
-                                    color='primary'
+                                    color='primary' variant='plain'
                                     href='/feedback'
                                     level='body-xs'
-                                    style={{ marginBottom: '10px' }}>
+                                    style={{ marginBottom: '10px', width: 'fit-content' }}>
                                     Write a feedback
                                 </Link>
                                 <a href="https://www.buymeacoffee.com/domiedev">
@@ -87,6 +87,10 @@ export default function Footer() {
 
                         </Box>
                     </div>
+                </Box>
+                <Divider sx={{ marginInline: '50px' }} />
+                <Box sx={{ display: 'flex', justifyContent: 'center', marginTop: '5px', alignItems: 'center' }}>
+                    <Typography level='body-xs'>&#xA9; Duelist Meta, 2023</Typography>
                 </Box>
             </Sheet>
 
