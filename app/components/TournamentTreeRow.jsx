@@ -55,21 +55,21 @@ export default function TournamentTreeRow({ data, title, expandedStatus, xs }) {
                 item.deckLink.length > 0 ?
                     <Tooltip key={index} size='sm' variant="outlined" color="primary" title={item.deckLink} placement="top">
                         <article className={`grid ${xs}`} >
-                            <Sheet variant='outlined' color={item.name.length > 0 ? 'primary' : 'neutral'} onClick={() => setOpen({ state: true, item: item.deckLink })} xs={2} className={expanded ? styles.treeRowContainerExpanded : styles.treeRowContainerExpandedFalse}>
-                                <div className={styles.informationRow}><GiPerson /> <Typography component='p' level='body-sm' color='inherit'>{item.name.length > 0 ? item.name : 'N/A'}</Typography ></div>
-                                <div className={styles.informationRow} ><GiStack /> <Typography component='p' level='body-sm' color='inherit'>{item.deck.length > 0 ? item.deck : 'N/A'}</Typography ></div>
-                                <div className={styles.informationRow}><GiStabbedNote /> <Typography component='p' level='body-sm' color='inherit'>{item.deckNote.length > 0 ? item.deckNote : 'N/A'}</Typography ></div>
-                                <div className={styles.informationRow}><HiExternalLink /><Typography component='p' level='body-sm' color='inherit'>{item.deckLink.length > 0 ? item.deckLink : 'N/A'}</Typography ></div>
+                            <Sheet variant='soft' color={item.name.length > 0 ? 'primary' : 'neutral'} onClick={() => setOpen({ state: true, item: item.deckLink })} xs={2} className={expanded ? styles.treeRowContainerExpanded : styles.treeRowContainerExpandedFalse}>
+                                <div className={styles.informationRow}><GiPerson /> <Typography component='p' level='body-sm' color={item.name.length > 0 ? 'inherit' : 'neutral'}>{item.name.length > 0 ? item.name : 'N/A'}</Typography ></div>
+                                <div className={styles.informationRow} ><GiStack /> <Typography component='p' level='body-sm' color={item.deck.length > 0 ? 'inherit' : 'neutral'}>{item.deck.length > 0 ? item.deck : 'N/A'}</Typography ></div>
+                                <div className={styles.informationRow}><GiStabbedNote /> <Typography component='p' level='body-sm' color={item.deckNote.length > 0 ? 'inherit' : 'neutral'}>{item.deckNote.length > 0 ? item.deckNote : 'N/A'}</Typography ></div>
+                                <div className={styles.informationRow}><HiExternalLink /><Typography component='p' level='body-sm' color={item.deckLink.length > 0 ? 'inherit' : 'neutral'}>{item.deckLink.length > 0 ? item.deckLink : 'N/A'}</Typography ></div>
                             </Sheet>
                         </article>
                     </Tooltip > :
                     <Tooltip key={index} size='sm' title="No external link provided" color="danger" placement="top" variant='outlined'>
-                        <div xs={2} className={expanded ? styles.treeRowContainerExpandedWithoutLink : styles.treeRowContainerExpandedFalse}>
-                            <div className={styles.informationRow}><GiPerson /> <Typography component='p' level='body-md' >{item.name.length > 0 ? item.name : 'N/A'}</Typography ></div>
-                            <div className={styles.informationRow} ><GiStack /> <Typography component='p' level='body-md'>{item.deck.length > 0 ? item.deck : 'N/A'}</Typography ></div>
-                            <div className={styles.informationRow}><GiStabbedNote /> <Typography component='p' level='body-md'>{item.deckNote.length > 0 ? item.deckNote : 'N/A'}</Typography ></div>
-                            <div className={styles.informationRow}><HiExternalLink /><Typography component='p' level='body-md'>{item.deckLink.length > 0 ? item.deckLink : 'N/A'}</Typography ></div>
-                        </div>
+                        <Sheet xs={2} color={item.name.length > 0 ? 'primary' : 'neutral'} className={expanded ? styles.treeRowContainerExpandedWithoutLink : styles.treeRowContainerExpandedFalse}>
+                            <div className={styles.informationRow}><GiPerson /> <Typography component='p' level='body-sm' color={item.name.length > 0 ? 'inherit' : 'neutral'}>{item.name.length > 0 ? item.name : 'N/A'}</Typography ></div>
+                            <div className={styles.informationRow} ><GiStack /> <Typography component='p' level='body-sm' color={item.deck.length > 0 ? 'inherit' : 'neutral'}>{item.deck.length > 0 ? item.deck : 'N/A'}</Typography ></div>
+                            <div className={styles.informationRow}><GiStabbedNote /> <Typography component='p' level='body-sm' color={item.deckLink.length > 0 ? 'inherit' : 'neutral'}>{item.deckNote.length > 0 ? item.deckNote : 'N/A'}</Typography ></div>
+                            <div className={styles.informationRow}><HiExternalLink /><Typography component='p' level='body-sm' color={item.deckNote.length > 0 ? 'inherit' : 'neutral'}>{item.deckLink.length > 0 ? item.deckLink : 'N/A'}</Typography ></div>
+                        </Sheet>
                     </Tooltip>
             ))
             }
