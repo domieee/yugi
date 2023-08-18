@@ -42,9 +42,6 @@
     
 }
 
-.treeHeadingDivider {
-    margin-bottom: 10px;
-}
 
 .buttonRow {
     margin-block: 15px;
@@ -87,6 +84,21 @@
 .gridItemContainer:hover {
     background-color: var(--joy-palette-primary-800, #0A2744);
     cursor: pointer;
+}
+
+.treeHeadingContainer:hover {
+    cursor: pointer;
+    background-color: #222;
+}
+
+.icon {
+    margin-right: 10px;
+    transform: rotate(0deg);
+}
+
+.iconExpandedFalse {
+    margin-right: 10px;
+    transform: rotate(90deg);
 }
 
 .informationRow {

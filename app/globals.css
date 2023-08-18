@@ -85,6 +85,17 @@ body {
   overflow-x: hidden;
 }
 
+::selection {
+  background-color: yellow;
+  color: #222; /* Textfarbe der Auswahl */
+}
+
+/* Auswahl in Firefox */
+::-moz-selection {
+  background-color: yellow;
+  color: #222;
+}
+
 body {
 
   color: rgb(var(--foreground-rgb));

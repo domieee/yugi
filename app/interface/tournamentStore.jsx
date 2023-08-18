@@ -44,6 +44,7 @@ export const useInterfaceStore = create((set) => ({
     }
 }));
 
+
 export const useTournamentStore = create(
     (set, get) => ({
         tournamentType: 'national',
@@ -51,14 +52,14 @@ export const useTournamentStore = create(
         totalParticipants: 0,
         date: '2023-07-07',
         firstPlace: [
-            { name: 'sdasds', deck: 'sdasds', deckNote: 'sdasds', deckLink: 'sdasds' }
+            { name: 'sdasds', deck: 'sdass', deckNote: 'sdaaaaas', deckLink: 'sdasdasdasds' }
         ],
         secondPlace: [
             { name: 'sdasds', deck: 'sdasds', deckNote: 'sdasds', deckLink: 'sdasds' }
         ],
         top4: [
             { name: 'sdasds', deck: 'sdasds', deckNote: 'sdasds', deckLink: 'sdasds' },
-            { name: 'sdasds', deck: 'sdasds', deckNote: 'sdasds', deckLink: 'sdasds' },
+            { name: 'sdasds', deck: 'sdasds', deckNote: 'sdasdsaaaaaaaaaaaaaaaaa', deckLink: 'sdasds' },
         ],
         top8: [
             { name: '', deck: '', deckNote: '', deckLink: '' },
@@ -131,7 +132,8 @@ export const useTournamentStore = create(
         updateField: (arrayName, index, fieldName, value) => {
             set((state) => {
                 const newArray = [...state[arrayName]];
-                newArray[index][fieldName] = value;
+                console.log("🚀 ~ file: tournamentStore.jsx:134 ~ set ~ newArray:", newArray)
+                newArray[index][fieldName] = value;  // Fix: index should be used directly
                 return { [arrayName]: newArray };
             });
         },
@@ -179,8 +181,7 @@ export const useTournamentStore = create(
             }));
         },
         fetchObjectsFromInterfaceState: async (useTournamentStore) => {
-            updateProgress(10)
-            const token = Cookies.get('token')
+            const userToken = Cookies.get('userToken')
             const interfaceState = useInterfaceStore.getState().interfaceState;
             const objects = [];
 
@@ -190,8 +191,9 @@ export const useTournamentStore = create(
                 if (objectArray) {
                     objects.push(objectArray);
                 }
-            });
-            const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}fetch-new-tournament`,
+            })
+
+            const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/fetch-new-tournament`,
                 {
                     method: 'POST',
                     headers: {
@@ -204,7 +206,7 @@ export const useTournamentStore = create(
                         "totalParticipants": useTournamentStore.totalParticipants,
                         "date": useTournamentStore.date,
                         "players": objects,
-                        "token": token
+                        "token": userToken
                     })
                 },
             )

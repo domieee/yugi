@@ -13,6 +13,8 @@ import { useTournamentStore, useInterfaceStore } from "./tournamentStore";
 
 import { BiPlus, BiTrash, BiSend } from "react-icons/bi";
 import InterfaceTreeRow from "../components/InterfaceTreeRow";
+import { useRouter } from "next/navigation";
+
 
 
 export default function Interface() {
@@ -29,6 +31,8 @@ export default function Interface() {
     const [fetching, setFetching] = useState(false)
 
     const [open, setOpen] = useState(false);
+
+    const router = useRouter()
 
     const handleOpen = () => {
         setOpen(true);
@@ -55,6 +59,18 @@ export default function Interface() {
         return cityData
     }
 
+    const handleTournamentFetch = async () => {
+
+        setFetching(true)
+        const tournament = await tournamentStore.fetchObjectsFromInterfaceState(tournamentStore)
+        console.log("🚀 ~ file: page.jsx:124 ~ handleTournamentFetch ~ tournament:", tournament)
+
+        if (await tournament) {
+            console.log(tournament)
+            router.push(`/tournaments/${tournament.tournamentId}`)
+        }
+    }
+
     const handleCitySearch = async (newInputValue) => {
         setCityOptions([])
 
@@ -65,7 +81,6 @@ export default function Interface() {
             setFetching(false)
             return
         }
-
         setCityOptions(cityData.geonames)
         setFetching(false)
     }
@@ -117,7 +132,8 @@ export default function Interface() {
                         <Sheet variant="soft" className={styles.itemContainer} color="primary">
                             <Typography className={styles.heading} level="body-xs">Location</Typography>
 
-                            {/* Depending on which value is selected in the thze tournament type select, we render either:
+                            {/* 
+                        Depending on which value is selected in the the tournament type select, we render either:
                             - Autocomplete with country data
                             - Autocomplete with city data
                         */}
@@ -130,7 +146,7 @@ export default function Interface() {
                                     placeholder="Choose a country"
                                     defaultValue={countries[0]}
                                     onChange={(event, newValue) => {
-                                        tournamentStore.setLocation(newValue)
+                                        tournamentStore.setLocation(newValue.label)
                                         console.log(tournamentStore.location)
                                     }}
                                     slotProps={{
@@ -142,7 +158,6 @@ export default function Interface() {
                                     options={countries}
                                     autoHighlight
                                     getOptionLabel={(option) => option.label}
-
                                     renderOption={(props, option) => (
                                         <AutocompleteOption {...props}>
                                             <ListItemDecorator>
@@ -265,11 +280,6 @@ export default function Interface() {
                 <Typography component='h3' level="h3">Create tournament tree</Typography>
                 <Divider />
 
-                {/* 
-            props: 
-                - headingText 
-            */}
-
                 <Sheet className={styles.treeContainer} variant="outlined" color="primary">
 
                     {interfaceStore.interfaceState.length > 0 ?
@@ -355,7 +365,7 @@ export default function Interface() {
                             return (
                                 <InterfaceTreeRow
                                     key={index}
-                                    index={index}
+                                    interfaceIndex={index}
                                     variableName={variableName}
                                     title={title}
                                     treeRow={treeRow}
@@ -371,20 +381,52 @@ export default function Interface() {
                 </Sheet>
                 <div className={styles.buttonRow}>
                     <div className={styles.buttonControls}>
+
+                        {/* Button to delete delete the last row in the interfaceStore */}
+
+                        <Button
+                            sx={{
+                                marginRight: '5px'
+                            }}
+                            disabled={interfaceStore.interfaceState.length === 0 ? true : false}
+                            onClick={checkForEmptyFields}
+                            startDecorator={<BiTrash />}
+                            size="sm"
+                            variant="outlined">
+                            Delete Row
+                        </Button>
+
+                        {/* Button to add a new row in the interfaceStore */}
+
                         <Button
                             disabled={interfaceStore.interfaceState.length === 7 ? true : false}
                             onClick={interfaceStore.addTournamentRow}
                             startDecorator={<BiPlus />}
                             size="sm"
-                            variant="outlined">Add Row</Button>
-                        <Button
-                            disabled={interfaceStore.interfaceState.length === 0 ? true : false}
-                            onClick={checkForEmptyFields}
-                            startDecorator={<BiTrash />}
-                            size="sm"
-                            variant="outlined">Delete Row</Button>
+                            variant="outlined">
+                            Add Row
+                        </Button>
                     </div>
-                    <Button startDecorator={<BiSend />}>Post new tournament</Button>
+
+                    {fetching ?
+                        <Button
+                            sx={{
+                                minWidth: '100px'
+                            }}
+                            loading
+                            loadingPosition="start"
+                            startDecorator={<CircularProgress size="sm" />}
+                            variant="solid"
+                        >
+                            Posting Tournament...
+                        </Button> :
+                        <Button
+                            sx={{
+                                minWidth: '100px'
+                            }}
+                            onClick={handleTournamentFetch}
+                            startDecorator={<BiSend />}>Post new tournament</Button>}
+
                 </div>
 
             </OuterWindowWrapper >

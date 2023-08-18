@@ -13,7 +13,7 @@ import { GiCalendar, GiPlanetConquest, GiTabletopPlayers, GiTrophy, GiStack } fr
 export default async function SingleTournamentOverview({ params }) {
 
     function capitalizeFirstLetter() {
-        return informations.tournamentType.charAt(0).toUpperCase() + informations.tournamentType.slice(1);
+        return informations.tournamentType?.charAt(0).toUpperCase() + informations?.tournamentType.slice(1);
     }
 
     const fetchInformations = async () => {
