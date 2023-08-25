@@ -1,10 +1,22 @@
 .landingPage {
-    height: 100vh;
-    display: flex;
-    align-items: center;
+    display: gap;
     padding-left: 100px;
+    flex-direction: column;
 }
 
 .landingPage > article {
     max-width: 1080px;
+}
+
+.lastPlayedTournaments {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+    justify-content: space-around;
+    margin: 25px 50px;
+}
+
+.responsiveItemContainer {
+    min-width: 270px;
+    width: 100%;
 }

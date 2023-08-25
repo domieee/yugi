@@ -1,20 +1,82 @@
-import { Typography } from '@mui/joy'
+import { Typography, Skeleton } from '@mui/joy'
 import Navigation from './components/Navigation'
 import Image from 'next/image'
+import dynamic from 'next/dynamic';
+
 
 import styles from './home.module.css'
 
-export default function Home() {
+export default async function Home() {
+
+  const fetchLastPlayedTournaments = async () => {
+    try {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/last-played-tournaments`, { next: { revalidate: 30 } });
+
+      if (!res.ok) {
+        throw new Error('Failed to fetch data');
+      }
+
+      const data = await res.json();
+      console.log('Fetched data:', data);
+      return data; document
+    } catch (error) {
+      console.error('Error fetching data:', error);
+      return null;
+    }
+  };
+
+  const fetchUpcomingTournaments = async () => {
+    try {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/upcoming-tournaments`, { next: { revalidate: 30 } });
+
+      if (!res.ok) {
+        throw new Error('Failed to fetch data');
+      }
+
+      const data = await res.json();
+      console.log('Fetched data:', data);
+      return data; document
+    } catch (error) {
+      console.error('Error fetching data:', error);
+      return null;
+    }
+  };
+
+  const lastPlayedTournaments = await fetchLastPlayedTournaments()
+  const upcomingTournaments = await fetchUpcomingTournaments()
+
+  const LastPlayedTournaments = dynamic(() => import('./components/LastPlayedTournaments'), {
+    loading: () => (
+      <Skeleton
+        variant="rectangular"
+        sx={{
+          opacity: '0.3',
+        }}
+        maxWidth={270.5}
+        height={100}
+        borderRadius={5}
+      />
+    ),
+    ssr: false,
+  });
+
+  const UpcomingTournaments = dynamic(() => import('./components/UpcomingTournaments'), {
+    loading: () => (
+      <Skeleton
+        animation='wave'
+        variant="rectangular"
+        opacity={0.1}
+
+        height={100}
+        borderRadius={5}
+      />
+    ),
+    ssr: false,
+  });
+
+
   return (
     <>
-      <div style={{ width: '460px', height: '460px', opacity: '0.5', position: 'fixed' }}>
-        <Image
-          src="/blobanimation(1).svg"
-          width={1000}
-          height={1000}
-          alt="Picture of the author"
-        />
-      </div>
       <section className={styles.landingPage}>
         <article>
           <Typography component='h1' level='h1'>Empowering Duelists with In-Depth Yu-Gi-Oh! Tournament Insights</Typography>
@@ -22,19 +84,27 @@ export default function Home() {
         </article>
       </section>
 
+
       <section className={styles.landingPage}>
         <article>
-          <Typography component='h2' level='h2'>Already curious what comes next? Watch Upcoming Tournaments</Typography>
-          <Typography component='p' level='body-md'>Stay ahead of the game by keeping an eye on the exciting tournaments on the horizon. Prepare your decks and strategies for these upcoming challenges.</Typography>
+          <Typography component='h2' level='h3'>Recent Tournaments</Typography>
         </article>
+        <div className={styles.lastPlayedTournaments}>
+          <LastPlayedTournaments tournament={lastPlayedTournaments[0]} />
+          <LastPlayedTournaments tournament={lastPlayedTournaments[1]} />
+          <LastPlayedTournaments tournament={lastPlayedTournaments[2]} />
+          <LastPlayedTournaments tournament={lastPlayedTournaments[3]} />
+          <LastPlayedTournaments tournament={lastPlayedTournaments[4]} />
+        </div>
       </section>
 
       <section className={styles.landingPage}>
         <article>
-          <Typography component='h2' level='h2'>Have you heard the latest? Watch Recent Tournaments</Typography>
-          <Typography component='p' level='body-md'>Relive the epic duels and remarkable moments from past tournaments. Explore the strategies that led to victory and the decks that dominated the competition. Learn from the history of dueling excellence and use it to shape your future triumphs.</Typography>
+          <Typography component='h2' level='h3'>Upcoming Tournaments</Typography>
+          <UpcomingTournaments data={upcomingTournaments} />
         </article>
       </section>
+
     </>
   )
 }
