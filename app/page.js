@@ -1,4 +1,4 @@
-import { Typography, Skeleton, CircularProgress, Sheet } from '@mui/joy'
+import { Typography, Skeleton, CircularProgress, Sheet, Divider } from '@mui/joy'
 import Navigation from './components/Navigation'
 import Image from 'next/image'
 import dynamic from 'next/dynamic';
@@ -94,7 +94,7 @@ export default async function Home() {
           </div>
 
         </section>
-
+        <Divider />
         <section className={styles.landingPage}>
           <article>
             <Typography component='h2' level='h3'>Recent Tournaments</Typography>
@@ -114,6 +114,7 @@ export default async function Home() {
           </div>
         </section>
 
+
         <section className={styles.landingPage}>
           <article>
             <Typography component='h2' level='h3'>Upcoming Tournaments</Typography>
@@ -122,12 +123,21 @@ export default async function Home() {
             <UpcomingTournaments data={upcomingTournaments} />
           </div>
         </section>
+        <Divider />
 
         <section className={styles.landingPage}>
           <article>
-            <Typography component='h2' level='h3'>Now it&apos;s your turn</Typography>
-            <Typography component='p' level='body-md'></Typography>
+            <Typography component='h2' level='h3'>Now it&apos;s Your Turn: Shape Our Path Forward</Typography>
           </article>
+          <Link href='/feedback'>
+            <div className={styles.feedbackCtaContainer}>
+              <div className={styles.feedbackShader}>
+                <Typography variant='h3' level='title-lg'>Provide a Feedback</Typography>
+                <Typography>Your role is pivotal in our exploration of Yu-Gi-Oh! tournament statistics. Your experiences will mold our platform. As a user, you grasp your needs best. Your input fuels our mission to deliver impactful data to the Yu-Gi-Oh! community.</Typography>
+                <Typography level='title-sm'>Join us - your insights shape our journey.</Typography>
+              </div>
+            </div>
+          </Link>
         </section>
       </OuterWindowWrapper >
     </>

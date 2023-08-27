@@ -1,4 +1,5 @@
 import { Divider, Grid, Sheet, Typography } from "@mui/joy";
+
 import OuterWindowWrapper from "../components/OuterWindowWrapper";
 import TableMUI from "../components/TableMUI";
 import Chart from "../components/Chart";
@@ -50,7 +51,7 @@ export default async function Statistics() {
             <Divider sx={{ marginBottom: '10px' }} />
             <div style={{ marginTop: '8px' }}>
                 <Typography level='h3' component='h3'>Winner Breakdown</Typography>
-                <Divider sx={{ marginBottom: '10px' }} />
+
                 <Grid container gap={2}>
                     <Grid sx={{ width: '100%' }} xs={12} lg={7.8} item>
                         <TableMUI data={winnerBreakdown} />
@@ -70,7 +71,6 @@ export default async function Statistics() {
 
             <div style={{ marginTop: '8px' }}>
                 <Typography level='h3' component='h3'>Overall Breakdown</Typography>
-                <Divider sx={{ marginBottom: '10px' }} />
                 <Grid container gap={2}>
                     <Grid xs={12} lg={4} item>
                         <Sheet sx={{ height: '100%', borderRadius: '5px', display: 'flex', justifyContent: 'center' }} variant="outlined" color="primary">

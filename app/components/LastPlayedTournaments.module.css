@@ -1,13 +1,12 @@
 .lastPlayedTournamentsItem {
     height: 100%;
     position: relative;
-    padding: 0px 8.5px 0px 8.5px;
+    padding: 5px 8.5px 0px 8.5px;
     border-radius: 5px;
     width: 270px;
     height: 100px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     transition: all 0.1s linear;
 }
 .lastPlayedTournamentsItem:hover {

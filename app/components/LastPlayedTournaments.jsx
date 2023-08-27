@@ -12,30 +12,27 @@ export default function LastPlayedTournaments({ data }) {
             case 'national':
                 return (
                     <Typography
+                        fontWeight={600}
                         className={styles.lastPlayedItemLabel}
-                        color="primary"
-                        level="body-xs"
-                        variant="outlined" > National
+                        level="body-xs"> National
                     </Typography >
 
                 )
             case 'regional':
                 return (
                     <Typography
+                        fontWeight={600}
                         className={styles.lastPlayedItemLabel}
-                        color="warning"
-                        level="body-xs"
-                        variant="outlined" > Regional
+                        level="body-xs" > Regional
                     </Typography >
 
                 )
             case 'other':
                 return (
                     <Typography
+                        fontWeight={600}
                         className={styles.lastPlayedItemLabel}
-                        color="success"
-                        level="body-xs"
-                        variant="outlined" > Other
+                        level="body-xs"> Other
                     </Typography >
 
                 )
