@@ -20,7 +20,7 @@ export default function UpcomingTournaments({ data }) {
             data.map((item, index) => (
                 <Sheet
                     className={styles.upcomingTournamentItem}
-                    variant='soft'
+                    variant='outlined'
                     color='primary'
                     key={index}>
                     <Typography>{item.datetimes.UIDate}</Typography>

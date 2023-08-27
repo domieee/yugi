@@ -6,6 +6,7 @@ import dynamic from 'next/dynamic';
 import styles from './home.module.css'
 import Link from 'next/link';
 import OuterWindowWrapper from './components/OuterWindowWrapper';
+import { MdKeyboardArrowRight } from 'react-icons/md';
 
 export default async function Home() {
 
@@ -65,19 +66,15 @@ export default async function Home() {
       />
     ),
     ssr: true,
-  });
-
-
-
-
+  })
 
   return (
     <>
       <OuterWindowWrapper>
         <section className={styles.landingPage}>
-          <Sheet variant='outlined' color='primary'>
+          <Sheet>
             <Typography component='h1' level='h1'><span style={{ background: 'linear-gradient(-30deg, var(--joy-palette-primary-700), var(--joy-palette-primary-400))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}> Empowering Duelists</span> with In-Depth Yu-Gi-Oh! Tournament Insights</Typography>
-            <Typography component='p' level='body-md'>Elevate your dueling prowess with comprehensive Yu-Gi-Oh! tournament insights withDuelist Meta. Discover winning strategies, top decks, and evolving metas. Step into the competitive arena armed with knowledge. Welcome to your dueling advantage.</Typography>
+            <Typography component='p' level='body-md'>Elevate your dueling prowess with comprehensive Yu-Gi-Oh! tournament insights with Duelist Meta. Discover winning strategies, top decks, and evolving metas. Step into the competitive arena armed with knowledge. Welcome to your dueling advantage.</Typography>
           </Sheet>
           <div className={styles.linkRow}>
             <Link href='/tournaments'>
@@ -104,6 +101,15 @@ export default async function Home() {
           </article>
           <div id='lastPlayedContainer' className={styles.lastPlayedTournaments}>
             <LastPlayedTournaments data={lastPlayedTournaments} />
+
+            <Link href='/tournaments'>
+              <Sheet className={styles.recentWatchMoreButton} variant='soft' color='primary'>
+                <div className={styles.typo}>
+                  <Typography sx={{ color: `var(--joy-palette-neutral-300, #CDD7E1)` }} level='title-md' fontWeight={400}>Watch more Tournaments</Typography>
+                  <MdKeyboardArrowRight style={{ height: '25px', width: '25px', color: `var(--joy-palette-neutral-300, #CDD7E1)` }} />
+                </div>
+              </Sheet>
+            </Link>
 
           </div>
         </section>
