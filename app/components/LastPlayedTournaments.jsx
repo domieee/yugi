@@ -51,14 +51,6 @@ export default function LastPlayedTournaments({ data }) {
                     <Sheet variant='outlined' color='primary' className={styles.lastPlayedTournamentsItem}>
                         {labelProvider(tournament)}
                         <div className={styles.tableRow}>
-                            <GiTrophy style={{ color: `var(--joy-palette-neutral-300, #CDD7E1)` }} />
-                            <Typography sx={{ color: `var(--joy-palette-neutral-300, #CDD7E1)` }} level='body-sm'>{tournament?.players[0][0].name} with {tournament?.players[0][0].deck}</Typography>
-                        </div>
-                        <div className={styles.tableRow}>
-                            <GiCalendar style={{ color: `var(--joy-palette-neutral-300, #CDD7E1)` }} />
-                            <Typography sx={{ color: `var(--joy-palette-neutral-300, #CDD7E1)` }} level='body-sm'>{tournament?.datetimes.UIDate}</Typography>
-                        </div>
-                        <div className={styles.tableRow}>
                             {tournament?.locationLabel.length > 0 ?
                                 <img
                                     loading="lazy"
@@ -70,6 +62,14 @@ export default function LastPlayedTournaments({ data }) {
                                 <GiPlanetConquest style={{ color: `var(--joy-palette-neutral-400, #9FA6AD)` }} />
                             }
                             <Typography sx={tournament?.location.length > 0 ? { color: `var(--joy-palette-neutral-300, #CDD7E1)` } : { color: `var(--joy-palette-neutral-400, #9FA6AD)`, fontStyle: 'italic' }} level='body-sm'>{tournament?.location.length !== 0 ? tournament?.location : 'N/A'}</Typography>
+                        </div>
+                        <div className={styles.tableRow}>
+                            <GiTrophy style={{ color: `var(--joy-palette-neutral-300, #ffd700)` }} />
+                            <Typography sx={{ color: `var(--joy-palette-neutral-300, #CDD7E1)` }} level='body-sm'>{tournament?.players[0][0].name} with {tournament?.players[0][0].deck}</Typography>
+                        </div>
+                        <div className={styles.tableRow}>
+                            <GiCalendar style={{ color: `var(--joy-palette-neutral-300, #CDD7E1)` }} />
+                            <Typography sx={{ color: `var(--joy-palette-neutral-300, #CDD7E1)` }} level='body-sm'>{tournament?.datetimes.UIDate}</Typography>
                         </div>
                         <div className={styles.tableRow}>
                             <GiTabletopPlayers style={tournament?.totalParticipants !== 0 ? { color: `var(--joy-palette-neutral-300, #CDD7E1)` } : { color: `var(--joy-palette-neutral-400, #9FA6AD)`, fontStyle: 'italic' }} />

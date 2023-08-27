@@ -103,10 +103,10 @@ export default async function Home() {
             <LastPlayedTournaments data={lastPlayedTournaments} />
 
             <Link href='/tournaments'>
-              <Sheet className={styles.recentWatchMoreButton} variant='soft' color='primary'>
+              <Sheet className={styles.recentWatchMoreButton} variant='outlined' color='primary'>
                 <div className={styles.typo}>
-                  <Typography sx={{ color: `var(--joy-palette-neutral-300, #CDD7E1)` }} level='title-md' fontWeight={400}>Watch more Tournaments</Typography>
-                  <MdKeyboardArrowRight style={{ height: '25px', width: '25px', color: `var(--joy-palette-neutral-300, #CDD7E1)` }} />
+                  <Typography sx={{ color: `var(--joy-palette-neutral-400, #9FA6AD)` }} level='title-md' fontWeight={600}>Watch more Tournaments</Typography>
+                  {/* <MdKeyboardArrowRight style={{ height: '25px', width: '25px', color: `var(--joy-palette-neutral-400, #9FA6AD)` }} /> */}
                 </div>
               </Sheet>
             </Link>

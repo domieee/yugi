@@ -50,6 +50,7 @@
     width: 270px;
     height: 100px;
     transition: all 0.1s linear;
+    border-radius: 5px;
 }
 
 .recentWatchMoreButton:hover {
