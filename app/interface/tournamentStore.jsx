@@ -49,6 +49,7 @@ export const useTournamentStore = create(
     (set, get) => ({
         tournamentType: 'national',
         location: '',
+        locationLabel: '',
         totalParticipants: 0,
         date: '2023-07-07',
         firstPlace: [
@@ -144,6 +145,9 @@ export const useTournamentStore = create(
         setLocation: (location) => {
             set({ location });
         },
+        setLocationLabel: (locationLabel) => {
+            set({ locationLabel });
+        },
         setTotalParticipants: (totalParticipants) => {
             set({ totalParticipants });
         },
@@ -203,6 +207,7 @@ export const useTournamentStore = create(
                     body: JSON.stringify({
                         "tournamentType": useTournamentStore.tournamentType,
                         "location": useTournamentStore.location,
+                        "locationLabel": useTournamentStore.locationLabel,
                         "totalParticipants": useTournamentStore.totalParticipants,
                         "date": useTournamentStore.date,
                         "players": objects,

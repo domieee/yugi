@@ -5,6 +5,7 @@ import dynamic from 'next/dynamic';
 
 
 import styles from './home.module.css'
+import Link from 'next/link';
 
 export default async function Home() {
 
@@ -57,7 +58,7 @@ export default async function Home() {
         borderRadius={5}
       />
     ),
-    ssr: false,
+    ssr: true,
   });
 
   const UpcomingTournaments = dynamic(() => import('./components/UpcomingTournaments'), {
@@ -71,13 +72,30 @@ export default async function Home() {
         borderRadius={5}
       />
     ),
-    ssr: false,
+    ssr: true,
   });
 
 
   return (
     <>
       <section className={styles.landingPage}>
+
+        <div className={styles.linkRow}>
+          <Link href='/tournaments'>
+            <div className={`${styles.lpaLink} ${styles.tournamentLink}`}>
+              <div className={styles.lpaLinkShader}>
+                <Typography level='title-lg'>Tournaments</Typography>
+              </div>
+            </div>
+          </Link>
+          <Link href='/statistics'>
+            <div className={`${styles.lpaLink} ${styles.statisticLink}`}>
+              <div className={styles.lpaLinkShader}>
+                <Typography level='title-lg'>Statistics</Typography>
+              </div>
+            </div>
+          </Link>
+        </div>
         <article>
           <Typography component='h1' level='h1'>Empowering Duelists with In-Depth Yu-Gi-Oh! Tournament Insights</Typography>
           <Typography component='p' level='body-md'>Elevate your dueling prowess with comprehensive Yu-Gi-Oh! tournament insights. Discover winning strategies, top decks, and evolving metas. Step into the competitive arena armed with knowledge. Welcome to your dueling advantage.</Typography>
@@ -101,8 +119,10 @@ export default async function Home() {
       <section className={styles.landingPage}>
         <article>
           <Typography component='h2' level='h3'>Upcoming Tournaments</Typography>
-          <UpcomingTournaments data={upcomingTournaments} />
         </article>
+        <div className={styles.upcomingTournaments}>
+          <UpcomingTournaments data={upcomingTournaments} />
+        </div>
       </section>
 
     </>

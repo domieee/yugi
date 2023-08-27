@@ -120,6 +120,7 @@ export default function Interface() {
                                 color="primary"
                                 placeholder='Choose a tournament type'
                                 defaultValue='national'>
+                                <Option value='other'>Other</Option>
                                 <Option value='national'>National</Option>
                                 <Option value='regional'>Regional</Option>
                             </Select>
@@ -138,7 +139,7 @@ export default function Interface() {
                             - Autocomplete with city data
                         */}
 
-                            {tournamentStore.tournamentType === 'national' ?
+                            {tournamentStore.tournamentType === 'national' || tournamentStore.tournamentType === 'other' ?
                                 <Autocomplete
 
                                     color="primary"
@@ -147,7 +148,8 @@ export default function Interface() {
                                     defaultValue={countries[0]}
                                     onChange={(event, newValue) => {
                                         tournamentStore.setLocation(newValue.label)
-                                        console.log(tournamentStore.location)
+                                        tournamentStore.setLocationLabel(newValue.code)
+                                        console.log(tournamentStore.locationLabel)
                                     }}
                                     slotProps={{
                                         input: {
@@ -225,24 +227,23 @@ export default function Interface() {
                     </Grid>
 
                     {/* # Date Selection */}
-
                     <Grid item lg={2.9} xs={12}>
                         <Sheet variant="soft" className={styles.itemContainer} color="primary">
                             <Typography className={styles.heading} level="body-xs">Tournament Date</Typography>
                             <Input
-
                                 type="date"
                                 variant="outlined"
                                 color="primary"
                                 value={tournamentStore.date}
-                                onChange={(event) => {
-                                    tournamentStore.setDate(event.target.value)
-                                    console.log(tournamentStore.date)
+                                onChange={(event, newValue) => {
+                                    console.log(newValue);
+                                    tournamentStore.setDate(event.target.value);
+                                    console.log(tournamentStore.date);
                                 }}
                                 slotProps={{
                                     input: {
-                                        min: '2018-06-07T00:00',
-                                        max: '2018-06-14T00:00',
+                                        min: '2021-01-01',  // Adjust the minimum year as needed
+                                        max: '2023-12-31',  // Adjust the maximum year as needed
                                     },
                                 }}
                             />

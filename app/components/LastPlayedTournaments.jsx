@@ -9,6 +9,7 @@ export default function LastPlayedTournaments({ tournament }) {
                 <p>{tournament.tournamentType}</p>
                 <p>{tournament.datetimes.UIDate}</p>
                 <p>{tournament.location.length !== 0 ? tournament.location : 'N/A'}</p>
+                {/* Add more elements and logic as needed */}
             </Sheet>
         </Link>
     );

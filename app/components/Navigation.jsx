@@ -16,7 +16,7 @@ import * as MUI from '@mui/joy';
 import { useStore } from '../stores/userStore';
 
 const NavigationButton = dynamic(() => import('./NavigationButton'), {
-    loading: () => <Skeleton variant="rectangular" width={27.5} height={27.5} sx={{ marginLeft: '50px' }} />, // Display a loading message while the component is being loaded
+    loading: () => <Skeleton variant="rectangular" width={27.5} height={27.5} sx={{ marginLeft: '50px', height: '27,5px', width: '27.5px' }} />, // Display a loading message while the component is being loaded
     ssr: false, // This will prevent the component from being SSR'd
 });
 
