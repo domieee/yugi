@@ -1,10 +1,11 @@
-import { Typography, Skeleton } from '@mui/joy'
+import { Typography, Skeleton, CircularProgress, Sheet } from '@mui/joy'
 import Navigation from './components/Navigation'
 import Image from 'next/image'
 import dynamic from 'next/dynamic';
 
 import styles from './home.module.css'
 import Link from 'next/link';
+import OuterWindowWrapper from './components/OuterWindowWrapper';
 
 export default async function Home() {
 
@@ -47,15 +48,7 @@ export default async function Home() {
 
   const LastPlayedTournaments = dynamic(() => import('./components/LastPlayedTournaments'), {
     loading: () => (
-      <Skeleton
-        variant="rectangular"
-        sx={{
-          opacity: '0.3',
-        }}
-        maxWidth={270.5}
-        height={100}
-        borderRadius={5}
-      />
+      <CircularProgress variant="outlined" />
     ),
     ssr: true,
   });
@@ -80,55 +73,57 @@ export default async function Home() {
 
   return (
     <>
-      <section className={styles.landingPage}>
-
-        <div className={styles.linkRow}>
-          <Link href='/tournaments'>
-            <div className={`${styles.lpaLink} ${styles.tournamentLink}`}>
-              <div className={styles.lpaLinkShader}>
-                <Typography level='title-lg'>Tournaments</Typography>
+      <OuterWindowWrapper>
+        <section className={styles.landingPage}>
+          <Sheet variant='outlined' color='primary'>
+            <Typography component='h1' level='h1'><span style={{ background: 'linear-gradient(-30deg, var(--joy-palette-primary-700), var(--joy-palette-primary-400))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}> Empowering Duelists</span> with In-Depth Yu-Gi-Oh! Tournament Insights</Typography>
+            <Typography component='p' level='body-md'>Elevate your dueling prowess with comprehensive Yu-Gi-Oh! tournament insights withDuelist Meta. Discover winning strategies, top decks, and evolving metas. Step into the competitive arena armed with knowledge. Welcome to your dueling advantage.</Typography>
+          </Sheet>
+          <div className={styles.linkRow}>
+            <Link href='/tournaments'>
+              <div className={`${styles.lpaLink} ${styles.tournamentLink}`}>
+                <div className={styles.lpaLinkShader}>
+                  <Typography level='title-lg'>Tournaments</Typography>
+                </div>
               </div>
-            </div>
-          </Link>
-          <Link href='/statistics'>
-            <div className={`${styles.lpaLink} ${styles.statisticLink}`}>
-              <div className={styles.lpaLinkShader}>
-                <Typography level='title-lg'>Statistics</Typography>
+            </Link>
+            <Link href='/statistics'>
+              <div className={`${styles.lpaLink} ${styles.statisticLink}`}>
+                <div className={styles.lpaLinkShader}>
+                  <Typography level='title-lg'>Statistics</Typography>
+                </div>
               </div>
-            </div>
-          </Link>
-        </div>
-        <article>
-          <Typography component='h1' level='h1'>Empowering Duelists with In-Depth Yu-Gi-Oh! Tournament Insights</Typography>
-          <Typography component='p' level='body-md'>Elevate your dueling prowess with comprehensive Yu-Gi-Oh! tournament insights. Discover winning strategies, top decks, and evolving metas. Step into the competitive arena armed with knowledge. Welcome to your dueling advantage.</Typography>
-        </article>
-      </section>
+            </Link>
+          </div>
 
-      <section className={styles.landingPage}>
-        <article>
-          <Typography component='h2' level='h3'>Recent Tournaments</Typography>
-        </article>
-        <div id='lastPlayedContainer' className={styles.lastPlayedTournaments}>
-          <LastPlayedTournaments data={lastPlayedTournaments} />
+        </section>
 
-        </div>
-      </section>
+        <section className={styles.landingPage}>
+          <article>
+            <Typography component='h2' level='h3'>Recent Tournaments</Typography>
+          </article>
+          <div id='lastPlayedContainer' className={styles.lastPlayedTournaments}>
+            <LastPlayedTournaments data={lastPlayedTournaments} />
 
-      <section className={styles.landingPage}>
-        <article>
-          <Typography component='h2' level='h3'>Upcoming Tournaments</Typography>
-        </article>
-        <div className={styles.upcomingTournaments}>
-          <UpcomingTournaments data={upcomingTournaments} />
-        </div>
-      </section>
+          </div>
+        </section>
 
-      <section className={styles.landingPage}>
-        <article>
-          <Typography component='h2' level='h3'>Now it&apos;s your turn</Typography>
-          <Typography component='p' level='body-md'></Typography>
-        </article>
-      </section>
+        <section className={styles.landingPage}>
+          <article>
+            <Typography component='h2' level='h3'>Upcoming Tournaments</Typography>
+          </article>
+          <div className={styles.upcomingTournaments}>
+            <UpcomingTournaments data={upcomingTournaments} />
+          </div>
+        </section>
+
+        <section className={styles.landingPage}>
+          <article>
+            <Typography component='h2' level='h3'>Now it&apos;s your turn</Typography>
+            <Typography component='p' level='body-md'></Typography>
+          </article>
+        </section>
+      </OuterWindowWrapper >
     </>
   )
 }

@@ -44,10 +44,11 @@ export default function LastPlayedTournaments({ data }) {
 
     return (
         data?.length > 0 ?
+
             data.map((tournament, index) => (
                 <Link key={index} href={`tournaments/${tournament?._id}`
                 }>
-                    <Sheet variant='soft' color='primary' className={styles.lastPlayedTournamentsItem}>
+                    <Sheet variant='outlined' color='primary' className={styles.lastPlayedTournamentsItem}>
                         {labelProvider(tournament)}
                         <div className={styles.tableRow}>
                             <GiTrophy style={{ color: 'white' }} />
@@ -70,9 +71,14 @@ export default function LastPlayedTournaments({ data }) {
                             }
                             <Typography level='body-sm'>{tournament?.location.length !== 0 ? tournament?.location : 'N/A'}</Typography>
                         </div>
+                        <div className={styles.tableRow}>
+                            <GiTabletopPlayers />
+                            <Typography>{tournament?.totalParticipants !== 0 ? tournament?.totalParticipants : 'N/A'}</Typography>
+                        </div>
                     </Sheet>
                 </Link >
             )) :
             <Typography>No data provided</Typography>
-    );
+    )
+
 }
