@@ -1,6 +1,42 @@
 .lastPlayedTournamentsItem {
-    padding: 20px 5px;
+    height: 100%;
+    position: relative;
+    padding: 0px 8.5px 15px 8.5px;
     border-radius: 5px;
     width: 270px;
     height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    transition: transform 0.1s linear;
+}
+.lastPlayedTournamentsItem:hover {
+    transform: scale(1.02);
+}
+
+
+.lastPlayedItemLabel {
+    position: absolute;
+    top: 7.5%;
+    padding-inline: 7.5px;
+    right: 3%;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.tableRow {
+    display: flex;
+    align-items: center;
+}
+
+.tableRow > svg {
+    width: 13px;
+    height: 13px;
+margin-right: 5px;
+}
+
+.tableRow > img {
+    width: 13px;
+    height: auto;
+margin-right: 5px;
 }

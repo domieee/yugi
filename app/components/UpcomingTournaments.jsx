@@ -5,8 +5,16 @@ export default function UpcomingTournaments({ data }) {
     return (
         data.length === 0 ?
             <Sheet
+                sx={{
+                    display: 'flex',
+                    width: '100%',
+                    height: '75px',
+                    justifyContent: 'center',
+                    alignItems: 'center'
+                }}
                 classname={styles.noDataContainer}
-                variant='outlined'>
+                variant='outlined'
+                color='primary'>
                 <Typography>No upcoming tournaments</Typography>
             </Sheet> :
             data.map((item, index) => (
@@ -18,6 +26,5 @@ export default function UpcomingTournaments({ data }) {
                     <Typography>{item.datetimes.UIDate}</Typography>
                 </Sheet>
             ))
-
     )
 }

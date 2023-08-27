@@ -3,7 +3,6 @@ import Navigation from './components/Navigation'
 import Image from 'next/image'
 import dynamic from 'next/dynamic';
 
-
 import styles from './home.module.css'
 import Link from 'next/link';
 
@@ -76,6 +75,9 @@ export default async function Home() {
   });
 
 
+
+
+
   return (
     <>
       <section className={styles.landingPage}>
@@ -102,17 +104,13 @@ export default async function Home() {
         </article>
       </section>
 
-
       <section className={styles.landingPage}>
         <article>
           <Typography component='h2' level='h3'>Recent Tournaments</Typography>
         </article>
-        <div className={styles.lastPlayedTournaments}>
-          <LastPlayedTournaments tournament={lastPlayedTournaments[0]} />
-          <LastPlayedTournaments tournament={lastPlayedTournaments[1]} />
-          <LastPlayedTournaments tournament={lastPlayedTournaments[2]} />
-          <LastPlayedTournaments tournament={lastPlayedTournaments[3]} />
-          <LastPlayedTournaments tournament={lastPlayedTournaments[4]} />
+        <div id='lastPlayedContainer' className={styles.lastPlayedTournaments}>
+          <LastPlayedTournaments data={lastPlayedTournaments} />
+
         </div>
       </section>
 
@@ -125,6 +123,12 @@ export default async function Home() {
         </div>
       </section>
 
+      <section className={styles.landingPage}>
+        <article>
+          <Typography component='h2' level='h3'>Now it&apos;s your turn</Typography>
+          <Typography component='p' level='body-md'></Typography>
+        </article>
+      </section>
     </>
   )
 }
