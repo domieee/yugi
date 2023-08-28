@@ -72,7 +72,7 @@ export default async function Home() {
     <>
       <OuterWindowWrapper>
         <section className={styles.landingPage}>
-          <Sheet className={styles.headerContainer}>
+          <Sheet variant='outlined' color='primary' className={styles.headerContainer}>
             <Typography component='h1' level='h1'><span style={{ background: 'linear-gradient(-30deg, var(--joy-palette-primary-700), var(--joy-palette-primary-400))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}> Empowering Duelists</span> with In-Depth Yu-Gi-Oh! Tournament Insights</Typography>
             <Typography component='p' level='body-md'>Elevate your dueling prowess with comprehensive Yu-Gi-Oh! tournament insights with Duelist Meta. Discover winning strategies, top decks, and evolving metas. Step into the competitive arena armed with knowledge. Welcome to your dueling advantage.</Typography>
 
@@ -91,15 +91,16 @@ export default async function Home() {
                   </div>
                 </div>
               </Link>
-
             </div>
-            <Divider />
           </Sheet>
         </section>
 
         <section className={styles.landingPage}>
+          <div className={styles.tableRow}>
+            <Typography component='h2' level='h3'>Recent Tournaments</Typography>
 
-          <Typography component='h2' level='h3'>Recent Tournaments</Typography>
+          </div>
+
 
           <div id='lastPlayedContainer' className={styles.lastPlayedTournaments}>
             <LastPlayedTournaments data={lastPlayedTournaments} />
@@ -118,9 +119,9 @@ export default async function Home() {
 
 
         <section className={styles.landingPage}>
-          <article>
+          <div className={styles.tableRow}>
             <Typography component='h2' level='h3'>Upcoming Tournaments</Typography>
-          </article>
+          </div>
           <div className={styles.upcomingTournaments}>
             <UpcomingTournaments data={upcomingTournaments} />
             <Link href='/tournaments'>
@@ -133,7 +134,6 @@ export default async function Home() {
             </Link>
           </div>
         </section>
-        <Divider />
 
         <section className={styles.landingPage}>
           <article>

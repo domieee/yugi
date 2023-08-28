@@ -218,8 +218,7 @@ export const useTournamentStore = create(
             if (res.ok) {
 
                 const json = await res.json();
-                console.log("🚀 ~ file: tournamentStore.js:185 ~ fetchObjectsFromInterfaceState: ~ res:", res)
-                console.log(json)
+                useTournamentStore.tournamentType = ''
                 return json
             } else {
                 return false

@@ -122,7 +122,7 @@ export default async function SingleTournamentOverview({ params }) {
                             <NavigationButton id={tournamentID} />
                         </div>
 
-                        <Divider sx={{ marginBottom: '10px' }} />
+
                         <Grid gap={2} sx={{ flexGrow: 1 }} container className={styles.statsWrapper}>
                             <TournamentStats icon={<GiTrophy />} title={'Tournament Winner'} data={informations.players[0][0].name} />
                             <TournamentStats icon={<GiStack />} title={'Winning Deck'} data={informations.players[0][0].deck} />
