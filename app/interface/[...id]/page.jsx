@@ -1,7 +1,7 @@
 'use client'
 
 import OuterWindowWrapper from '@/app/components/OuterWindowWrapper';
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { Grid, Sheet, Typography, Select, Option, Input, Autocomplete, AutocompleteOption, ListItemDecorator, ListItemContent, CircularProgress, Divider, Button, Alert, Modal, ModalDialog, ModalClose } from "@mui/joy";
 
@@ -15,10 +15,13 @@ import { citys } from "../data/citys";
 
 export default function TournamentEdit({ params }) {
 
-    console.log("🚀 ~ file: page.jsx:4 ~ TournamentEdit ~ params:", params.id[0])
-
     const tournamentStore = useTournamentStore(state => state)
     const interfaceStore = useInterfaceStore(state => state)
+
+
+    const [fetching, setFetching] = useState(false)
+
+    const [cityOptions, setCityOptions] = useState(citys)
 
     const handleTournamentTypeChange = (newValue) => {
         tournamentStore.setTournamentType(newValue)
@@ -61,6 +64,33 @@ export default function TournamentEdit({ params }) {
         fetchInformations()
     }, [])
 
+    const handleDataFetch = async (newInputValue) => {
+        setCityOptions([])
+        setFetching(true)
+
+        const data = await fetch(`https://cityserver.onrender.com/?searchValue=${newInputValue}`)
+
+        console.log(cityOptions)
+
+        const cityData = await data.json()
+
+        return cityData
+    }
+
+    const handleCitySearch = async (newInputValue) => {
+        setCityOptions([])
+
+        const cityData = await handleDataFetch(newInputValue)
+
+        if (newInputValue.length === 0) {
+            setCityOptions(citys)
+            setFetching(false)
+            return
+        }
+        setCityOptions(cityData.geonames)
+        setFetching(false)
+    }
+
 
     return (
         <OuterWindowWrapper>
@@ -101,7 +131,7 @@ export default function TournamentEdit({ params }) {
                                 color="primary"
                                 id="country-select-demo"
                                 placeholder="Choose a country"
-                                defaultValue={tournamentStore.location}
+
                                 onChange={(event, newValue) => {
                                     tournamentStore.setLocation(newValue.label)
                                     tournamentStore.setLocationLabel(newValue.code)
@@ -112,10 +142,12 @@ export default function TournamentEdit({ params }) {
                                         autoComplete: 'new-password',
                                     },
                                 }}
+                                co
                                 sx={{ width: '100%' }}
                                 options={countries}
                                 autoHighlight
                                 getOptionLabel={(option) => option.label}
+                                value={tournamentStore.location}
                                 renderOption={(props, option) => (
                                     <AutocompleteOption {...props}>
                                         <ListItemDecorator>
