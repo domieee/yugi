@@ -80,14 +80,14 @@ export default async function Home() {
               <Link href='/tournaments'>
                 <div className={`${styles.lpaLink} ${styles.tournamentLink}`}>
                   <div className={styles.lpaLinkShader}>
-                    <Typography variant='h3' level='title-lg'>Tournaments</Typography>
+                    <Typography variant='h3' color='text.primary' level='title-lg'>Tournaments</Typography>
                   </div>
                 </div>
               </Link>
               <Link href='/statistics'>
                 <div className={`${styles.lpaLink} ${styles.statisticLink}`}>
                   <div className={styles.lpaLinkShader}>
-                    <Typography variant='h3' level='title-lg'>Statistics</Typography>
+                    <Typography variant='h3' color='text.primary' level='title-lg'>Statistics</Typography>
                   </div>
                 </div>
               </Link>
@@ -98,9 +98,9 @@ export default async function Home() {
         </section>
 
         <section className={styles.landingPage}>
-          <article>
-            <Typography component='h2' level='h3'>Recent Tournaments</Typography>
-          </article>
+
+          <Typography component='h2' level='h3'>Recent Tournaments</Typography>
+
           <div id='lastPlayedContainer' className={styles.lastPlayedTournaments}>
             <LastPlayedTournaments data={lastPlayedTournaments} />
 

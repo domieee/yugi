@@ -21,6 +21,8 @@ export default function NavigationButton() {
     console.log("🚀 ~ file: NavigationButton.jsx:14 ~ NavigationButton ~ username:", username)
     const logoutUser = () => {
         setUserName(false)
+        setUserID(false)
+        setUserRole(false)
         Cookies.remove('userToken')
         router.push('/login')
     }
@@ -44,6 +46,7 @@ export default function NavigationButton() {
                         {username}
                     </MenuButton>
                     <Menu
+                        placement="bottom-end"
                         invertedColors
                         color="primary"
                         size="sm">

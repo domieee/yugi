@@ -4,6 +4,7 @@ import Chart from '../../components/Chart'
 import styles from './id.module.css'
 import OuterWindowWrapper from "@/app/components/OuterWindowWrapper";
 import TournamentTreeRow from "@/app/components/TournamentTreeRow";
+import dynamic from 'next/dynamic';
 
 import { Typography, Sheet, Grid, Divider } from "@mui/joy";
 import { GiCalendar, GiPlanetConquest, GiTabletopPlayers, GiTrophy, GiStack } from "react-icons/gi";
@@ -11,10 +12,17 @@ import { GiCalendar, GiPlanetConquest, GiTabletopPlayers, GiTrophy, GiStack } fr
 
 
 export default async function SingleTournamentOverview({ params }) {
+    const tournamentID = params.id
+    console.log("🚀 ~ file: page.jsx:16 ~ SingleTournamentOverview ~ tournamentID:", tournamentID)
 
     function capitalizeFirstLetter() {
-        return informations.tournamentType?.charAt(0).toUpperCase() + informations?.tournamentType.slice(1);
+        return informations?.tournamentType?.charAt(0).toUpperCase() + informations?.tournamentType.slice(1);
     }
+
+    const NavigationButton = dynamic(() => import('../../components/MenuButtonTournamentOverview'), {
+        loading: () => null, // Display a loading message while the component is being loaded
+        ssr: false, // This will prevent the component from being SSR'd
+    });
 
     const fetchInformations = async () => {
         try {
@@ -99,16 +107,21 @@ export default async function SingleTournamentOverview({ params }) {
     };
 
     const informations = await fetchInformations()
+    console.log("🚀 ~ file: page.jsx:108 ~ SingleTournamentOverview ~ informations:", informations)
     const breakdown = await fetchTournamentBreakdown()
     const tournamentTree = await fetchTournamentTree()
 
     return (
         <>
             <OuterWindowWrapper>
-                <Typography level='h2' component='h2'>{capitalizeFirstLetter()} Tournament Overview</Typography>
+
                 <section>
-                    <article>
-                        <Typography component='h3' level='h3'>Informations</Typography>
+                    <article className={styles.informationsContainer}>
+                        <div className={styles.headerRow}>
+                            <Typography level='h2' component='h2'>{capitalizeFirstLetter()} Tournament Overview</Typography>
+                            <NavigationButton id={tournamentID} />
+                        </div>
+
                         <Divider sx={{ marginBottom: '10px' }} />
                         <Grid gap={2} sx={{ flexGrow: 1 }} container className={styles.statsWrapper}>
                             <TournamentStats icon={<GiTrophy />} title={'Tournament Winner'} data={informations.players[0][0].name} />

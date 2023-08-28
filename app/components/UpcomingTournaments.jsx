@@ -56,7 +56,7 @@ export default function UpcomingTournaments({ data }) {
             data.map((tournament, index) => (
                 <Link
                     key={index}
-                    href='/tournaments'>
+                    href={`/tournaments/${tournament._id}`} >
                     <Sheet
                         sx={
                             {
@@ -87,7 +87,7 @@ export default function UpcomingTournaments({ data }) {
                             </div>
                         </div>
                     </Sheet>
-                </Link>
+                </Link >
             ))
     )
 }

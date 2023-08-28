@@ -14,8 +14,13 @@
     height: 100%;
 }
 
-.chartContainer {
+.headerRow {
+    display: flex;
+    justify-content: space-between;
+}
 
+
+.chartContainer {
     width: 400px;
     margin-inline: auto;
 }
