@@ -6,7 +6,16 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    transition: all 0.1s linear;
+    transition: all 0.05s linear;
+}
+
+.upcomingTournamentItem:hover {
+    transform: scale(1.02);
+}
+
+.upcomingTournamentItem:active {
+    transform: scale(0.98);
+    opacity: 0.5;
 }
 
 .noDataContainer {
