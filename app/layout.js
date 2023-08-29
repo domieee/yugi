@@ -10,7 +10,7 @@ import Footer from './components/Footer';
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
-  title: 'Duelist Meta | Your Source for Yu-Gi-Oh! Tournament Data and Insights',
+  title: 'Duelist Meta | Yu-Gi-Oh! Tournament Data and Insights',
   description: 'Unlock the Strategic Insights of the Yu-Gi-Oh! Meta | Dive into comprehensive tournament statistics and analysis on Yu-Gi-Oh! Meta. Elevate your gameplay with data-driven insights and stay ahead in the competitive scene!',
 }
 
