@@ -10,6 +10,7 @@ import { useInterfaceStore } from '../tournamentStore';
 import { useStore } from '@/app/stores/userStore';
 import { BiPlus, BiTrash, BiSend } from "react-icons/bi";
 import InterfaceTreeRow from '@/app/components/InterfaceTreeRow';
+import dynamic from 'next/dynamic';
 
 import styles from '../interface.module.css'
 
@@ -26,6 +27,11 @@ export default function TournamentEdit({ params }) {
     const [fetching, setFetching] = useState(false)
 
     const [cityOptions, setCityOptions] = useState(citys)
+
+    const TournamentDelete = dynamic(() => import('../../components/TournamentDelete'), {
+        loading: () => null, // Display a loading message while the component is being loaded
+        ssr: true, // This will prevent the component from being SSR'd
+    });
 
     const handleTournamentTypeChange = (newValue) => {
         if (tournamentStore.tournamentType === 'national' || tournamentStore.tournamentTyp === 'other' && newValue === 'regional') {
@@ -448,18 +454,8 @@ export default function TournamentEdit({ params }) {
                     </Button>
                 </div>
                 <div>
-                    {role === 'administrator' ?
-                        <Button
-                            sx={{
-                                marginRight: '20px'
-                            }}
-                            disabled={fetching}
-                            variant='outlined'
-                            color='danger'>
-                            Delete Tournament
-                        </Button> : null
-                    }
 
+                    <TournamentDelete role={role} />
 
                     {fetching ?
                         <Button

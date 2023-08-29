@@ -34,7 +34,7 @@ export default async function SingleTournamentOverview({ params }) {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    id: params.id
+                    id: params.id[0]
                 })
             })
 
@@ -124,8 +124,8 @@ export default async function SingleTournamentOverview({ params }) {
 
 
                         <Grid gap={2} sx={{ flexGrow: 1 }} container className={styles.statsWrapper}>
-                            <TournamentStats icon={<GiTrophy />} title={'Tournament Winner'} data={informations.players[0][0].name} />
-                            <TournamentStats icon={<GiStack />} title={'Winning Deck'} data={informations.players[0][0].deck} />
+                            <TournamentStats icon={<GiTrophy />} title={'Tournament Winner'} data={informations?.players[0][0].name} />
+                            <TournamentStats icon={<GiStack />} title={'Winning Deck'} data={informations?.players[0][0].deck} />
                             <TournamentStats icon={<GiPlanetConquest />} title={'Location'} data={informations?.location} />
                             <TournamentStats icon={<GiCalendar />} title={'Date'} data={informations?.datetimes.UIDate} />
                             <TournamentStats icon={<GiTabletopPlayers />} title={'Total Participants'} data={informations?.totalParticipants} />
