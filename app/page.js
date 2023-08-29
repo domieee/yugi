@@ -72,10 +72,11 @@ export default async function Home() {
     <>
       <OuterWindowWrapper>
         <section className={styles.landingPage}>
-          <Sheet variant='outlined' color='primary' className={styles.headerContainer}>
+          <Sheet variant='outlined' color='neutral' className={styles.headerContainer}>
             <Typography component='h1' color='text.primary' level='h1'><span style={{ background: 'linear-gradient(-30deg, var(--joy-palette-primary-700), var(--joy-palette-primary-400))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}> Empowering Duelists</span> with In-Depth Yu-Gi-Oh! Tournament Insights</Typography>
-            <Typography component='p' level='body-md'>Elevate your dueling prowess with comprehensive Yu-Gi-Oh! tournament insights with Duelist Meta. Discover winning strategies, top decks, and evolving metas. Step into the competitive arena armed with knowledge. Welcome to your dueling advantage.</Typography>
-
+            <Divider sx={{ mb: '5px' }} />
+            <Typography maxWidth='900px' component='p' color='text.tertiary' level='body-md'>Elevate your dueling prowess with comprehensive Yu-Gi-Oh! tournament insights with Duelist Meta. Discover winning strategies, top decks, and evolving metas. Step into the competitive arena armed with knowledge.</Typography>
+            <Typography sx={{ mt: '10px' }} color='text.tertiary' fontWeight={600} level='body-md'>Welcome to your dueling advantage.</Typography>
             <div className={styles.linkRow}>
               <Link href='/tournaments'>
                 <div className={`${styles.lpaLink} ${styles.tournamentLink}`}>
@@ -97,7 +98,7 @@ export default async function Home() {
 
         <section className={styles.landingPage}>
           <div className={styles.tableRow}>
-            <Typography component='h2' level='h3'>Recent Tournaments</Typography>
+            <Typography color='text.primary' component='h2' level='h3'>Recent Tournaments</Typography>
 
           </div>
 
@@ -108,7 +109,7 @@ export default async function Home() {
             <Link href='/tournaments'>
               <Sheet className={styles.recentWatchMoreButton} variant='outlined' color='primary'>
                 <div className={styles.typo}>
-                  <Typography sx={{ color: `var(--joy-palette-neutral-400, #9FA6AD)` }} level='title-md' fontWeight={600}>Watch more Tournaments</Typography>
+                  <Typography color='text.tertiary' level='title-md' fontWeight={600}>Watch more Tournaments</Typography>
                   {/* <MdKeyboardArrowRight style={{ height: '25px', width: '25px', color: `var(--joy-palette-neutral-400, #9FA6AD)` }} /> */}
                 </div>
               </Sheet>
@@ -120,14 +121,14 @@ export default async function Home() {
 
         <section className={styles.landingPage}>
           <div className={styles.tableRow}>
-            <Typography component='h2' level='h3'>Upcoming Tournaments</Typography>
+            <Typography color='text.primary' component='h2' level='h3'>Upcoming Tournaments</Typography>
           </div>
           <div className={styles.upcomingTournaments}>
             <UpcomingTournaments data={upcomingTournaments} />
             <Link href='/tournaments'>
               <Sheet className={styles.recentWatchMoreButtonUpcoming} variant='outlined' color='primary'>
                 <div className={styles.typo}>
-                  <Typography sx={{ color: `var(--joy-palette-neutral-400, #9FA6AD)` }} level='title-md' fontWeight={600}>Watch more Tournaments</Typography>
+                  <Typography color='text.tertiary' level='title-md' fontWeight={600}>Watch more Tournaments</Typography>
                   {/* <MdKeyboardArrowRight style={{ height: '25px', width: '25px', color: `var(--joy-palette-neutral-400, #9FA6AD)` }} /> */}
                 </div>
               </Sheet>
@@ -137,7 +138,7 @@ export default async function Home() {
 
         <section className={styles.landingPage}>
           <article>
-            <Typography component='h2' level='h3'>Now it&apos;s Your Turn: Shape Our Path Forward</Typography>
+            <Typography color='text.primary' component='h2' level='h3'>Now it&apos;s Your Turn: Shape Our Path Forward</Typography>
           </article>
           <Link href='/feedback'>
             <div className={styles.feedbackCtaContainer}>

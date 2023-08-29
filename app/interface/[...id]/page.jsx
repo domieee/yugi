@@ -70,7 +70,33 @@ export default function TournamentEdit({ params }) {
                 }
 
                 const data = await res.json();
-                console.log("🚀 ~ file: page.jsx:47 ~ fetchInformations ~ data:", data)
+                console.log("🚀 ~ file: page.jsx:73 ~ fetchInformations ~ data:", data)
+
+
+
+                tournamentStore.firstPlace.map((item, index) => {
+                    tournamentStore.updateField('firstPlace', index, 'name', data.players[0][index].name)
+                    tournamentStore.updateField('firstPlace', index, 'deck', data.players[0][index].deck)
+                    tournamentStore.updateField('firstPlace', index, 'deckNote', data.players[0][index].deckNote)
+                    tournamentStore.updateField('firstPlace', index, 'deckLink', data.players[0][index].deckLink)
+                })
+
+                tournamentStore.secondPlace.map((item, index) => {
+                    tournamentStore.updateField('secondPlace', index, 'name', data.players[1][index].name)
+                    tournamentStore.updateField('secondPlace', index, 'deck', data.players[1][index].deck)
+                    tournamentStore.updateField('secondPlace', index, 'deckNote', data.players[1][index].deckNote)
+                    tournamentStore.updateField('secondPlace', index, 'deckLink', data.players[1][index].deckLink)
+                })
+
+                tournamentStore.top4.map((item, index) => {
+                    tournamentStore.updateField('top4', index, 'name', data.players[2][index].name)
+                    tournamentStore.updateField('top4', index, 'deck', data.players[2][index].deck)
+                    tournamentStore.updateField('top4', index, 'deckNote', data.players[2][index].deckNote)
+                    tournamentStore.updateField('top4', index, 'deckLink', data.players[2][index].deckLink)
+                })
+
+
+
 
                 await tournamentStore.setTournamentType(data.tournamentType)
                 await tournamentStore.setLocation(data.location)
@@ -86,6 +112,7 @@ export default function TournamentEdit({ params }) {
         }
 
         fetchInformations()
+        setFetching(false)
     }, [])
 
     const handleDataFetch = async (newInputValue) => {

@@ -12,7 +12,7 @@ import { GiCalendar, GiPlanetConquest, GiTabletopPlayers, GiTrophy, GiStack } fr
 
 
 export default async function SingleTournamentOverview({ params }) {
-    const tournamentID = params.id
+    const tournamentID = params
     console.log("🚀 ~ file: page.jsx:16 ~ SingleTournamentOverview ~ tournamentID:", tournamentID)
 
     function capitalizeFirstLetter() {
@@ -43,6 +43,7 @@ export default async function SingleTournamentOverview({ params }) {
             }
 
             const data = await res.json();
+            console.log("🚀 ~ file: page.jsx:46 ~ fetchInformations ~ data:", data)
 
             return data
         } catch (error) {
@@ -62,7 +63,7 @@ export default async function SingleTournamentOverview({ params }) {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    id: params.id
+                    id: params.id[0]
                 })
             });
 
@@ -89,7 +90,7 @@ export default async function SingleTournamentOverview({ params }) {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    id: params.id
+                    id: params.id[0]
                 })
             });
 
