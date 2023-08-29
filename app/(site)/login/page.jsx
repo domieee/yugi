@@ -12,7 +12,7 @@ import { useStore } from '@/app/stores/userStore';
 import Cookies from 'js-cookie';
 import { useRouter } from 'next/navigation';
 
-import { Divider, Typography } from '@mui/joy';
+import { Divider, Sheet, Typography } from '@mui/joy';
 import { useState } from 'react';
 import { MdPerson2, MdKey } from 'react-icons/md';
 
@@ -105,7 +105,7 @@ export default function Login() {
     return (
         <OuterWindowWrapper>
             <section className={styles.loginWrapper}>
-                <article className={styles.loginContainer}>
+                <Sheet variant='outlined' color='primary' className={styles.loginContainer}>
                     <h2>Login</h2>
                     <Divider />
                     <form method="post" className={styles.form}>
@@ -142,7 +142,7 @@ export default function Login() {
                         <Divider sx={{ marginBottom: '10px' }} />
                         <Typography className={styles.register} level='body-xs'><Link href='/register'> Not registered yet?</Link></Typography>
                     </form>
-                </article>
+                </Sheet>
             </section>
         </OuterWindowWrapper >
     )

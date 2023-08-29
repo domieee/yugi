@@ -2,7 +2,7 @@
 
 import OuterWindowWrapper from "@/app/components/OuterWindowWrapper"
 import styles from './register.module.css'
-import { Typography, Button, Input, Divider } from "@mui/joy"
+import { Typography, Button, Input, Divider, Sheet } from "@mui/joy"
 import { MdPerson2, MdKey, MdEmail } from 'react-icons/md';
 import Link from "next/link";
 import { useState } from "react";
@@ -97,7 +97,7 @@ export default function Register() {
     return (
         <OuterWindowWrapper>
             <section className={styles.registerWrapper}>
-                <article className={styles.registerContainer}>
+                <Sheet variant="outlined" color="primary" className={styles.registerContainer}>
                     <h2>Register</h2>
                     <Divider />
                     <form method="post" className={styles.form}>
@@ -131,7 +131,7 @@ export default function Register() {
                         <Divider sx={{ marginBottom: '10px' }} />
                         <Typography className={styles.login} level='body-xs'><Link href='/login'> Already have an account?</Link></Typography>
                     </form>
-                </article>
+                </Sheet>
             </section>
         </OuterWindowWrapper>
     )
