@@ -11,6 +11,7 @@ import { useRouter } from 'next/navigation';
 import { useStore } from '../stores/userStore';
 
 export default function MenuButtonTournamentOverview(tournament) {
+    console.log("🚀 ~ file: MenuButtonTournamentOverview.jsx:14 ~ MenuButtonTournamentOverview ~ tournament:", tournament.id.id[0])
 
     const router = useRouter()
 
@@ -40,7 +41,7 @@ export default function MenuButtonTournamentOverview(tournament) {
                     color='primary'
                     variant='outlined'>
                     <MenuItem
-                        onClick={() => router.push(`/interface/${tournament?.id[0]}`)}>
+                        onClick={() => router.push(`/interface/${tournament.id.id[0]}`)}>
                         Edit Tournament
                     </MenuItem>
                     {role === 'administrator' ?
