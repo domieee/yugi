@@ -218,9 +218,11 @@
 }
 
 .headerContainer {
-    -webkit-box-shadow:0px 0px 98px 0px rgba(12,125,255,0.15);
-    -moz-box-shadow: 0px 0px 98px 0px rgba(12,125,255,0.15);
-    box-shadow: 0px 0px 98px 0px rgba(12,125,255,0.15);
+
+    -webkit-box-shadow:0px 0px 100px 25px rgba(12,125,255,0.15);
+    -moz-box-shadow: 0px 0px 100px 25px rgba(12,125,255,0.15);
+    box-shadow: 0px 0px 100px 25px rgba(12,125,255,0.15);
+    
     
     
     margin-block: 25px;

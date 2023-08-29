@@ -13,6 +13,8 @@ export default function LastPlayedTournaments({ data }) {
                 return (
                     <Typography
                         fontWeight={600}
+                        variant='outlined'
+                        color='primary'
                         className={styles.lastPlayedItemLabel}
                         level="body-xs"> National
                     </Typography >
@@ -22,6 +24,8 @@ export default function LastPlayedTournaments({ data }) {
                 return (
                     <Typography
                         fontWeight={600}
+                        variant='outlined'
+                        color='primary'
                         className={styles.lastPlayedItemLabel}
                         level="body-xs" > Regional
                     </Typography >
@@ -31,6 +35,8 @@ export default function LastPlayedTournaments({ data }) {
                 return (
                     <Typography
                         fontWeight={600}
+                        variant='outlined'
+                        color='primary'
                         className={styles.lastPlayedItemLabel}
                         level="body-xs"> Other
                     </Typography >
