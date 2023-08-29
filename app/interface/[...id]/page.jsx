@@ -70,9 +70,6 @@ export default function TournamentEdit({ params }) {
                 }
 
                 const data = await res.json();
-                console.log("🚀 ~ file: page.jsx:73 ~ fetchInformations ~ data:", data)
-
-
 
                 tournamentStore.firstPlace.map((item, index) => {
                     tournamentStore.updateField('firstPlace', index, 'name', data.players[0][index].name)
@@ -95,8 +92,43 @@ export default function TournamentEdit({ params }) {
                     tournamentStore.updateField('top4', index, 'deckLink', data.players[2][index].deckLink)
                 })
 
+                if (data.players[3]) {
+                    tournamentStore.top8.map((item, index) => {
+                        tournamentStore.updateField('top8', index, 'name', data.players[3][index].name)
+                        tournamentStore.updateField('top8', index, 'deck', data.players[3][index].deck)
+                        tournamentStore.updateField('top8', index, 'deckNote', data.players[3][index].deckNote)
+                        tournamentStore.updateField('top8', index, 'deckLink', data.players[3][index].deckLink)
+                    })
+                    interfaceStore.interfaceState.push('top8')
+                }
 
-
+                if (data.players[4]) {
+                    tournamentStore.top16.map((item, index) => {
+                        tournamentStore.updateField('top16', index, 'name', data.players[4][index].name)
+                        tournamentStore.updateField('top16', index, 'deck', data.players[4][index].deck)
+                        tournamentStore.updateField('top16', index, 'deckNote', data.players[4][index].deckNote)
+                        tournamentStore.updateField('top16', index, 'deckLink', data.players[4][index].deckLink)
+                    })
+                    interfaceStore.interfaceState.push('top16')
+                }
+                if (data.players[5]) {
+                    tournamentStore.top32.map((item, index) => {
+                        tournamentStore.updateField('top32', index, 'name', data.players[5][index].name)
+                        tournamentStore.updateField('top32', index, 'deck', data.players[5][index].deck)
+                        tournamentStore.updateField('top32', index, 'deckNote', data.players[5][index].deckNote)
+                        tournamentStore.updateField('top32', index, 'deckLink', data.players[5][index].deckLink)
+                    })
+                    interfaceStore.interfaceState.push('top32')
+                }
+                if (data.players[6]) {
+                    tournamentStore.top64.map((item, index) => {
+                        tournamentStore.updateField('top64', index, 'name', data.players[6][index].name)
+                        tournamentStore.updateField('top64', index, 'deck', data.players[6][index].deck)
+                        tournamentStore.updateField('top64', index, 'deckNote', data.players[6][index].deckNote)
+                        tournamentStore.updateField('top64', index, 'deckLink', data.players[6][index].deckLink)
+                    })
+                    interfaceStore.interfaceState.push('top64')
+                }
 
                 await tournamentStore.setTournamentType(data.tournamentType)
                 await tournamentStore.setLocation(data.location)
@@ -110,7 +142,7 @@ export default function TournamentEdit({ params }) {
                 return null;
             }
         }
-
+        interfaceStore.interfaceState = ['firstPlace', 'secondPlace', 'top4']
         fetchInformations()
         setFetching(false)
     }, [])
@@ -146,6 +178,7 @@ export default function TournamentEdit({ params }) {
     }
 
     const checkForEmptyFields = () => {
+        console.log(interfaceStore.interfaceState[interfaceStore.interfaceState.length - 1], 'asddddddddddddddddddd')
         if (tournamentStore.isAnyFieldEmpty(interfaceStore.interfaceState[interfaceStore.interfaceState.length - 1])) {
             handleOpen()
             return
@@ -172,6 +205,7 @@ export default function TournamentEdit({ params }) {
     }
 
     return (
+
         <OuterWindowWrapper>
             <Typography level='h3' component='h3'>Edit A Tournament</Typography>
 
@@ -507,6 +541,58 @@ export default function TournamentEdit({ params }) {
                 </div>
             </div>
 
+
+            <Modal
+                aria-labelledby="modal-title"
+                aria-describedby="modal-desc"
+                open={open}
+                onClose={() => setOpen(false)}
+                sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+            >
+                <Sheet
+                    variant="outlined"
+                    sx={{
+                        maxWidth: 500,
+                        borderRadius: 'md',
+                        p: 3,
+                        boxShadow: 'lg',
+                    }}
+                >
+                    <ModalClose
+                        variant="outlined"
+                        sx={{
+                            top: 'calc(-1/4 * var(--IconButton-size))',
+                            right: 'calc(-1/4 * var(--IconButton-size))',
+                            boxShadow: '0 2px 12px 0 rgba(0 0 0 / 0.2)',
+                            borderRadius: '50%',
+                            bgcolor: 'background.surface',
+                        }}
+                    />
+                    <Typography
+                        component="h2"
+                        id="modal-title"
+                        level="h4"
+                        textColor="inherit"
+                        fontWeight="lg"
+                        mb={1}
+                    >
+                        Delete Changes?
+                    </Typography>
+                    <Divider />
+                    <Typography id="modal-desc" textColor="text.tertiary">
+                        You are about to delete some changes you have made. Do you want to proceed?
+                    </Typography>
+                    <div className={styles.modalButtonControl}>
+                        <Button
+                            onClick={() => setOpen(false)}
+                            variant="outlined">Decline</Button>
+                        <Button onClick={() => handleRowDelete()}>Delete Changes</Button>
+                    </div>
+                </Sheet>
+            </Modal>
         </OuterWindowWrapper >
+
+
+
     )
 }
