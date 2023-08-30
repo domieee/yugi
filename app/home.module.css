@@ -161,6 +161,10 @@
     width: 100%;
     border-radius: 5px;
     transition: all 0.2s linear;
+    backdrop-filter: blur(5px);
+    box-shadow: -5px -3px 39px -3px rgba(0,0,0,0.49) inset;
+    -webkit-box-shadow: -5px -3px 39px -3px rgba(0,0,0,0.49) inset;
+    -moz-box-shadow: -5px -3px 39px -3px rgba(0,0,0,0.49) inset;
 }
 
 .feedbackShader {
@@ -173,6 +177,7 @@
     padding-left: 20px;
     background: rgb(18,20,22);
     transition: all 0.5s linear;
+
     background: -moz-linear-gradient(90deg, rgba(18,20,22,1) 0%, rgba(18,20,22,1) 45%, rgba(31,31,31,0) 100%);
     background: -webkit-linear-gradient(90deg, rgba(18,20,22,1) 0%, rgba(18,20,22,1) 45%, rgba(31,31,31,0) 100%);
     background: linear-gradient(90deg, rgba(18,20,22,1) 0%, rgba(18,20,22,1) 45%, rgba(31,31,31,0) 100%);
@@ -227,7 +232,7 @@
     
     
     
-    margin-block: 100px 25px;
+    margin-block: 50px 25px;
     border-radius: 5px;
     padding: 25px 20px;
 }
