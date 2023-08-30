@@ -22,19 +22,24 @@ export default function TournamentEdit({ params }) {
     const tournamentStore = useTournamentStore(state => state)
     console.log("🚀 ~ file: page.jsx:19 ~ TournamentEdit ~ tournamentStore:", tournamentStore.location)
     const interfaceStore = useInterfaceStore(state => state)
+
+    const username = useStore((state) => state.username)
     const role = useStore((state) => state.role)
+    const id = useStore((state) => state.id)
+
     const inputRef = useRef(null)
-    const [fetching, setFetching] = useState(false)
+    const [fetching, setFetching] = useState(true)
+    const [cityFetching, setCityFetching] = useState(false)
 
     const [cityOptions, setCityOptions] = useState(citys)
 
     const TournamentDelete = dynamic(() => import('../../components/TournamentDelete'), {
         loading: () => null, // Display a loading message while the component is being loaded
-        ssr: true, // This will prevent the component from being SSR'd
+        ssr: false, // This will prevent the component from being SSR'd
     });
 
     const handleTournamentTypeChange = (newValue) => {
-        if (tournamentStore.tournamentType === 'national' || tournamentStore.tournamentTyp === 'other' && newValue === 'regional') {
+        if (tournamentStore.tournamentType === 'national' || tournamentStore.tournamentType === 'other' && newValue === 'regional') {
             tournamentStore.setLocation('')
         }
         tournamentStore.setTournamentType(newValue)
@@ -48,6 +53,9 @@ export default function TournamentEdit({ params }) {
     const handleClose = () => {
         setOpen(false);
     };
+
+
+    const dateRef = useRef('2023-02-02');
 
 
     useEffect(() => {
@@ -71,26 +79,42 @@ export default function TournamentEdit({ params }) {
 
                 const data = await res.json();
 
-                tournamentStore.firstPlace.map((item, index) => {
-                    tournamentStore.updateField('firstPlace', index, 'name', data.players[0][index].name)
-                    tournamentStore.updateField('firstPlace', index, 'deck', data.players[0][index].deck)
-                    tournamentStore.updateField('firstPlace', index, 'deckNote', data.players[0][index].deckNote)
-                    tournamentStore.updateField('firstPlace', index, 'deckLink', data.players[0][index].deckLink)
-                })
+                await tournamentStore.setTournamentType(data.tournamentType)
+                await tournamentStore.setLocation(data.location)
+                await tournamentStore.setLocationLabel(data.locationLabel)
+                await tournamentStore.setDate(`${data.datetimes.year}-${data.datetimes.month}-${data.datetimes.day}`)
 
-                tournamentStore.secondPlace.map((item, index) => {
-                    tournamentStore.updateField('secondPlace', index, 'name', data.players[1][index].name)
-                    tournamentStore.updateField('secondPlace', index, 'deck', data.players[1][index].deck)
-                    tournamentStore.updateField('secondPlace', index, 'deckNote', data.players[1][index].deckNote)
-                    tournamentStore.updateField('secondPlace', index, 'deckLink', data.players[1][index].deckLink)
-                })
 
-                tournamentStore.top4.map((item, index) => {
-                    tournamentStore.updateField('top4', index, 'name', data.players[2][index].name)
-                    tournamentStore.updateField('top4', index, 'deck', data.players[2][index].deck)
-                    tournamentStore.updateField('top4', index, 'deckNote', data.players[2][index].deckNote)
-                    tournamentStore.updateField('top4', index, 'deckLink', data.players[2][index].deckLink)
-                })
+                if (data.players[0]) {
+                    tournamentStore.firstPlace.map((item, index) => {
+                        tournamentStore.updateField('firstPlace', index, 'name', data.players[0][index].name)
+                        tournamentStore.updateField('firstPlace', index, 'deck', data.players[0][index].deck)
+                        tournamentStore.updateField('firstPlace', index, 'deckNote', data.players[0][index].deckNote)
+                        tournamentStore.updateField('firstPlace', index, 'deckLink', data.players[0][index].deckLink)
+                    })
+                    interfaceStore.interfaceState.push('firstPlace')
+                }
+
+                if (data.players[1]) {
+                    tournamentStore.secondPlace.map((item, index) => {
+                        tournamentStore.updateField('secondPlace', index, 'name', data.players[1][index].name)
+                        tournamentStore.updateField('secondPlace', index, 'deck', data.players[1][index].deck)
+                        tournamentStore.updateField('secondPlace', index, 'deckNote', data.players[1][index].deckNote)
+                        tournamentStore.updateField('secondPlace', index, 'deckLink', data.players[1][index].deckLink)
+                    })
+                    interfaceStore.interfaceState.push('secondPlace')
+                }
+                if (data.players[2]) {
+
+
+                    tournamentStore.top4.map((item, index) => {
+                        tournamentStore.updateField('top4', index, 'name', data.players[2][index].name)
+                        tournamentStore.updateField('top4', index, 'deck', data.players[2][index].deck)
+                        tournamentStore.updateField('top4', index, 'deckNote', data.players[2][index].deckNote)
+                        tournamentStore.updateField('top4', index, 'deckLink', data.players[2][index].deckLink)
+                    })
+                    interfaceStore.interfaceState.push('top4')
+                }
 
                 if (data.players[3]) {
                     tournamentStore.top8.map((item, index) => {
@@ -132,24 +156,24 @@ export default function TournamentEdit({ params }) {
 
                 await tournamentStore.setTournamentType(data.tournamentType)
                 await tournamentStore.setLocation(data.location)
-                await tournamentStore.setDate(data.datetimes.UIDate)
+                await tournamentStore.setDate(`${data.datetimes.year}-${data.datetimes.month}-${data.datetimes.day}`)
                 await tournamentStore.setTotalParticipants(data.totalParticipants)
-                console.log("🚀 ~ file: page.jsx:51 ~ fetchInformations ~ data.location:", data.location)
-                console.log("🚀 ~ file: page.jsx:47 ~ fetchInformations ~ tournamentStore:", tournamentStore.tournamentType)
 
+                setFetching(false)
             } catch (error) {
                 console.error('Error fetching data:', error);
                 return null;
             }
         }
-        interfaceStore.interfaceState = ['firstPlace', 'secondPlace', 'top4']
+        interfaceStore.interfaceState = []
+
         fetchInformations()
-        setFetching(false)
+
     }, [])
 
     const handleDataFetch = async (newInputValue) => {
         setCityOptions([])
-        setFetching(true)
+        setCityFetching(true)
 
         const data = await fetch(`https://cityserver.onrender.com/?searchValue=${newInputValue}`)
 
@@ -169,12 +193,12 @@ export default function TournamentEdit({ params }) {
         if (newInputValue.length === 0) {
             setCityOptions(citys)
             console.log("🚀 ~ file: page.jsx:89 ~ handleCitySearch ~ citys:", citys)
-            setFetching(false)
+            setCityFetching(false)
             return
         }
         await setCityOptions(cityData.geonames)
         console.log("🚀 ~ file: page.jsx:93 ~ handleCitySearch ~ cityData.geonames:", cityData.geonames)
-        setFetching(false)
+        setCityFetching(false)
     }
 
     const checkForEmptyFields = () => {
@@ -186,17 +210,7 @@ export default function TournamentEdit({ params }) {
             interfaceStore.deleteLastItem()
         }
     }
-    const handleTournamentFetch = async () => {
 
-        setFetching(true)
-        const tournament = await tournamentStore.fetchObjectsFromInterfaceState(tournamentStore)
-        console.log("🚀 ~ file: page.jsx:124 ~ handleTournamentFetch ~ tournament:", tournament)
-
-        if (await tournament) {
-            console.log(tournament)
-            router.push(`/tournaments/${tournament.tournamentId}`)
-        }
-    }
 
     const handleRowDelete = () => {
         tournamentStore.resetArray(interfaceStore.interfaceState[interfaceStore.interfaceState.length - 1])
@@ -204,8 +218,25 @@ export default function TournamentEdit({ params }) {
         handleClose()
     }
 
-    return (
+    const userInformations = {
+        "username": username,
+        "id": id,
+        "role": role
+    }
 
+    const handleUpdate = async (id) => {
+        console.log(userInformations)
+        console.log("🚀 ~ file: page.jsx:210 ~ handleUpdate ~ params.id[0]:", params.id[0])
+        await tournamentStore.sendUpdate(params.id[0], userInformations)
+
+    }
+
+    if (fetching) return (
+        <OuterWindowWrapper >
+            <CircularProgress variant='outlined' sx={{ alignSelf: 'center', marginBlock: 'auto' }} />
+        </OuterWindowWrapper>
+    )
+    else return (
         <OuterWindowWrapper>
             <Typography level='h3' component='h3'>Edit A Tournament</Typography>
 
@@ -344,11 +375,13 @@ export default function TournamentEdit({ params }) {
                             type="date"
                             variant="outlined"
                             color="primary"
-                            value={tournamentStore.date}
+                            defaultValue={tournamentStore.date}
                             onChange={(event, newValue) => {
-                                console.log(newValue);
-                                tournamentStore.setDate(event.target.value);
+                                const e = event.target.value
+                                console.log("🚀 ~ file: page.jsx:375 ~ TournamentEdit ~ newValue:", e)
+                                tournamentStore.setDate(e);
                                 console.log(tournamentStore.date);
+                                console.log("🚀 ~ file: page.jsx:378 ~ TournamentEdit ~ tournamentStore.date:", tournamentStore.date)
                             }}
                             slotProps={{
                                 input: {
@@ -534,7 +567,7 @@ export default function TournamentEdit({ params }) {
                             sx={{
                                 minWidth: '100px'
                             }}
-                            onClick={handleTournamentFetch}
+                            onClick={() => handleUpdate(params.id[0])}
                             startDecorator={<BiSend />}>
                             Update Tournament
                         </Button>}

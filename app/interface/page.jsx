@@ -4,7 +4,7 @@ import { Grid, Sheet, Typography, Select, Option, Input, Autocomplete, Autocompl
 import OuterWindowWrapper from "../components/OuterWindowWrapper";
 
 import styles from './interface.module.css'
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { countries } from "./data/countries";
 import { citys } from "./data/citys";
@@ -99,6 +99,11 @@ export default function Interface() {
             interfaceStore.deleteLastItem()
         }
     }
+
+    useEffect(() => {
+        interfaceStore.interfaceState = ['firstPlace', 'secondPlace', 'top4']
+        tournamentStore.setTournamentType('national')
+    }, [])
 
 
     return (
@@ -234,11 +239,12 @@ export default function Interface() {
                                 type="date"
                                 variant="outlined"
                                 color="primary"
-                                value={tournamentStore.date}
                                 onChange={(event, newValue) => {
-                                    console.log(newValue);
-                                    tournamentStore.setDate(event.target.value);
+                                    const e = event.target.value
+                                    console.log("🚀 ~ file: page.jsx:375 ~ TournamentEdit ~ newValue:", e)
+                                    tournamentStore.setDate(e);
                                     console.log(tournamentStore.date);
+                                    console.log("🚀 ~ file: page.jsx:378 ~ TournamentEdit ~ tournamentStore.date:", tournamentStore.date)
                                 }}
                                 slotProps={{
                                     input: {

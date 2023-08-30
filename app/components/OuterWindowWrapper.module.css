@@ -3,4 +3,7 @@
     max-width: 1480px;
     min-height: 100svh;
     padding-bottom: 50px;
+    display: flex;
+
+    flex-direction: column;
 }

@@ -48,10 +48,10 @@ export const useInterfaceStore = create((set) => ({
 export const useTournamentStore = create(
     (set, get) => ({
         tournamentType: 'national',
-        location: '',
-        locationLabel: '',
+        location: 'Andorra',
+        locationLabel: 'AD',
         totalParticipants: 0,
-        date: '2023-07-07',
+        date: '',
         firstPlace: [
             { name: '', deck: '', deckNote: '', deckLink: '' }
         ],
@@ -152,7 +152,6 @@ export const useTournamentStore = create(
             set({ totalParticipants });
         },
         setDate: (date) => {
-            date = dayjs(date)
             set({ date });
         },
         isAnyFieldEmpty: (arrayName) => {
@@ -197,6 +196,9 @@ export const useTournamentStore = create(
                 }
             })
 
+
+            console.log("🚀 ~ file: tournamentStore.jsx:201 ~ fetchObjectsFromInterfaceState: ~ objects:", objects)
+
             const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/fetch-new-tournament`,
                 {
                     method: 'POST',
@@ -224,6 +226,55 @@ export const useTournamentStore = create(
                 return false
             }
             return objects;
+        },
+        sendUpdate: async (id, userInformations) => {
+            console.log(id)
+            const tournamentStore = useTournamentStore.getState()
+
+            console.log("🚀 ~ file: tournamentStore.jsx:232 ~ sendUpdate: ~ tournamentStore:", tournamentStore)
+
+            const interfaceState = await useInterfaceStore.getState().interfaceState;
+            console.log("🚀 ~ file: tournamentStore.jsx:238 ~ sendUpdate: ~ interfaceState:", interfaceState)
+            let objects = [];
+
+
+            interfaceState.forEach((state) => {
+                if (tournamentStore[state]) {
+                    objects.push(tournamentStore[state]);
+                    console.log("🚀 ~ file: tournamentStore.jsx:247 ~ interfaceState.forEach ~ objects:", objects)
+                }
+            })
+
+
+            console.log("🚀 ~ file: tournamentStore.jsx:248 ~ sendUpdate: ~ objects:", objects)
+
+            const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/update-tournament`,
+                {
+                    method: 'POST',
+                    headers: {
+                        "Access-Control-Allow-Origin": '*',
+                        "Content-Type": "application/json; charset=UTF-8"
+                    },
+                    body: JSON.stringify({
+                        "id": id,
+                        "tournamentType": tournamentStore.tournamentType,
+                        "editedBy": userInformations,
+                        "location": tournamentStore.location,
+                        "locationLabel": tournamentStore.locationLabel,
+                        "totalParticipants": tournamentStore.totalParticipants,
+                        "date": tournamentStore.date,
+                        "players": objects,
+                    })
+                },
+            )
+            if (res.ok) {
+
+                const json = await res.json();
+                useTournamentStore.tournamentType = ''
+                return json
+            } else {
+                return false
+            }
         },
     })
 )   
